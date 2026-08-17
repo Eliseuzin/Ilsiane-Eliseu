@@ -46,7 +46,8 @@ main {
   margin: auto;
   max-width: 800px;
   min-height: 320px;
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
+  background-image: url();
   border-radius: 5px;
 }
 h1 {
