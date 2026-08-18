@@ -47,7 +47,7 @@ main {
   max-width: 800px;
   min-height: 320px;
   /* background-color: aliceblue; */
-  background-image: url("static/imagens/fundo_entrada.png");
+  /* background-image: url("static/img/fundo_entrada.png"); */
   border-radius: 5px;
 }
 h1 {
