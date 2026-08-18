@@ -8,7 +8,24 @@
   --cor4: rgba(5, 70, 9, 0.281);
 }
 body {
-  background-color: var(--cor4);
+  /* background-color: var(--cor4); */
+  min-height: 100vh;
+  background-color: var(--cor2);
+  background-image: url("../img/fundo_entrada_uprate.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+main {
+  margin: auto;
+  max-width: 800px;
+  min-height: 320px;
+  /* background-color: aliceblue; */
+  /* background-image: url("../img/fundo_entrada.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+  border-radius: 5px;
 }
 header {
   text-align: center;
@@ -42,13 +59,7 @@ nav a:active {
   color: red;
 }
 
-main {
-  margin: auto;
-  max-width: 800px;
-  min-height: 320px;
-  background-color: aliceblue;
-  border-radius: 5px;
-}
+
 h1 {
   text-align: center;
 }
