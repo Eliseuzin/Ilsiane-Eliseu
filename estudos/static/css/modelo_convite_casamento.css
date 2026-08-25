@@ -9,12 +9,13 @@
 }
 body {
   /* background-color: var(--cor4); */
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color: var(--cor2);
   background-image: url("../img/fundo_entrada_uprate.png");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 main {
   margin: auto;
@@ -62,7 +63,29 @@ nav a:active {
 
 h1 {
   text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+#uniao{
+  text-align: center;
+  background-color: blue;
+  border-radius: 70%;
+}
+  
+#dia{
+  text-align: center;
+  color: blueviolet;
+}
+
+#local{
+  text-align: center;
+  color: blue;
+}
+
+
+
+
+
+
 h3 {
   padding: 10px 0px;
 }
