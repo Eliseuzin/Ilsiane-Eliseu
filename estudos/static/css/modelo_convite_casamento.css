@@ -60,6 +60,188 @@ nav a:active {
   color: red;
 }
 
+main {
+  /* background-color: #ffffff30;
+  border-radius: 5px;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 11px; */
+}
+
+main > div {
+  flex: 500px;
+}
+/* inicio boas vindas */
+#boasvindas{
+  background-color: #ffffff30;
+  border-radius: 5px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 10px;
+}
+
+#boasvindas > div {
+  flex: 300px;
+}
+
+.declaracaoboasvindas{
+  margin: 10px 0px 10px 0px;
+  padding: 10px 0px 10px 0px;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* fim boas vindas */
+
+/* inicio contagem regressiva */
+#contagemregressiva{
+  background-color: #ffffff30;
+  border-radius: 5px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 10px;
+}
+
+#contagemregressiva > div {
+  flex: 300px;
+}
+/* fim contagemre gressiva */
+
+
+
+/*inicio declaraca ocasal */
+
+#ocasal {
+  background-color: #ffffff30;
+  border-radius: 5px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 10px;
+}
+
+#ocasal > div {
+  flex: 300px;
+}
+
+.declaracaocasal{
+  margin: 10px 0px 10px 0px;
+  padding: 10px 0px 10px 0px;
+  font-size: 18px;
+  text-align: center;
+}
+/* fim declaracao casal */
+
+
+
+/* inicio declaracao padrinhos */
+#padrinhos{
+  background-color: #ffffff30;
+  border-radius: 5px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 10px;
+}
+
+#padrinhos > div {
+  flex: 300px;
+}
+
+.declaracaopadrinhos{
+  margin: 10px 0px 10px 0px;
+  padding: 10px 0px 10px 0px;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* fim declaracao padrinhos */
+
+/* inicio localizacao da igreja */
+#localizacaodaigreja{
+  background-color: #ffffff30;
+  border-radius: 5px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 10px;
+}
+
+#localizacaodaigreja > div {
+  flex: 300px;
+}
+
+.localizacaodaigreja{
+  margin: 10px 0px 10px 0px;
+  padding: 10px 0px 10px 0px;
+  font-size: 18px;
+  text-align: center;
+}
+/* fim localizacao da igreja */
+
+/* inicio lista de presentes */
+#listadepresentes{
+  background-color: #ffffff30;
+  border-radius: 5px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 10px;
+}
+
+#listadepresentes > div {
+  flex: 300px;
+}
+
+/* fim lista de presentes */
+
+
+/* inicio confirmaçao de presença */
+#confirmarpresenca{
+  background-color: #ffffff30;
+  border-radius: 5px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 10px;
+}
+
+#confirmarpresenca > div {
+  flex: 300px;
+}
+
+/* fim confirmacao de presenca */
+
+
+/* inicio recados */
+#recados{
+    background-color: #ffffff30;
+  border-radius: 5px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 10px;
+}
+
+#recados > div {
+  flex: 300px;
+}
+/* fim recados */
+
+
+
+
 
 h1 {
   text-align: center;
