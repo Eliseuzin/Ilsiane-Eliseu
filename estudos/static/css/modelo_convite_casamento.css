@@ -110,6 +110,41 @@ main > div {
 #contagemregressiva > div {
   flex: 300px;
 }
+
+.contador {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    text-align: center;
+}
+
+.contador div {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cor2);
+    border: 2px solid #ffffff90#333;
+    border-radius: 15px;
+    padding: 0%;
+    margin: 0%;
+
+}
+
+.contador span {
+    font-size: 40px;
+    font-weight: bold;
+    color: #ffffff99;
+    align-content: space-between;
+
+
+}
+
+.contador small {
+    font-size: 14px;
+    
+
+}
+
+
 /* fim contagemre gressiva */
 
 
