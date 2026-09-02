@@ -6,6 +6,9 @@
   --cor2: rgba(15, 124, 15, 0.719);
   --cor3: rgb(4, 54, 4);
   --cor4: rgba(5, 70, 9, 0.281);
+  --cor5: rgb(98, 114, 61);
+  --cor6: rgb(116, 131, 82);
+  
 }
 body {
   /* background-color: var(--cor4); */
@@ -34,13 +37,14 @@ header {
   font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 10px;
   padding: 10px;
-  background-image: linear-gradient(to bottom, var(--cor2), var(--cor1));
+  /* background-image: linear-gradient(to bottom, var(--cor2), var(--cor1)); */
+  background-image: linear-gradient(to bottom, var(--cor5), var(--cor6));
   border-bottom: 1px solid var(--cor4);
 }
 nav {
   padding: 5px;
   margin: -9.99px 0px 10px 0px;
-  background-image: linear-gradient(to bottom, var(--cor1), var(--cor3));
+  background-image: linear-gradient(to bottom, var(--cor5), var(--cor6));
   text-align: center;
 }
 nav a {
@@ -57,21 +61,64 @@ nav a:hover {
   color: rgba(143, 156, 144, 0.863);
 }
 nav a:active {
-  color: red;
+  color: var(--cor1);
 }
 
-main {
-  /* background-color: #ffffff30;
+/* main {
+  background-color: #ffffff30;
   border-radius: 5px;
   margin: 10px;
   display: flex;
   flex-wrap: wrap;
-  padding: 11px; */
-}
+  padding: 11px;
+} */
 
 main > div {
   flex: 500px;
 }
+
+/* inicio imagem principal nomes, dia e local */
+
+#mainimagem {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+#mainimagem h1 {
+    margin: 0;
+    font-size: clamp(45px, 8vw, 90px);
+    font-weight: 400;
+}
+
+#uniao {
+    font-size: 0.6em;
+    margin: 0 10px;
+}
+
+#dia {
+    margin: 20px 0 5px;
+    font-size: clamp(18px, 3vw, 28px);
+    color: #11111190;
+}
+
+#local {
+    margin: 0;
+    font-size: clamp(15px, 2vw, 20px);
+    color: #11111190;
+}
+
+
+/* fim imagem principal nomes, dia e local */
+
+
+
 /* inicio boas vindas */
 #boasvindas{
   background-color: #ffffff30;
@@ -121,7 +168,7 @@ main > div {
 .contador div {
     display: flex;
     flex-direction: column;
-    background-color: var(--cor2);
+    background-color: var(--cor5);
     border: 2px solid #ffffff90#333;
     border-radius: 15px;
     padding: 0%;
@@ -276,32 +323,20 @@ main > div {
 
 
 
+/* h1 {
+  text-align: center;
+  font-family: "Italianno", cursive;
+  font-size: 60px;
+  color: var(--cor1);
+} */
 
 
 h1 {
   text-align: center;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Great Vibes", cursive;
+  font-size: 60px;
+  color: var(--cor5);
 }
-#uniao{
-  text-align: center;
-  background-color: blue;
-  border-radius: 70%;
-}
-  
-#dia{
-  text-align: center;
-  color: blueviolet;
-}
-
-#local{
-  text-align: center;
-  color: blue;
-}
-
-
-
-
-
 
 h3 {
   padding: 10px 0px;
