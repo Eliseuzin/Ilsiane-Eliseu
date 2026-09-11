@@ -117,6 +117,17 @@ main > div {
 
 /* fim imagem principal nomes, dia e local */
 
+/* inicio flor de fundo para títulos */
+.flor_fundo_titulos {
+  width: 150px;
+  height: 150px;
+  background-image: url("../img/flor_do_fundos.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0 auto;
+}
+/* fim flor de fundo para títulos */
 
 
 /* inicio boas vindas */
@@ -212,6 +223,7 @@ main > div {
   flex: 300px;
 }
 
+
 .declaracaocasal{
   margin: 10px 0px 10px 0px;
   padding: 10px 0px 10px 0px;
@@ -219,6 +231,110 @@ main > div {
   text-align: center;
 }
 /* fim declaracao casal */
+
+
+
+/* inicio fotos juntas */
+
+
+/* #nossa_foto_juntos{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+#fotos_separados_do_casal_he{
+  width: 200px;
+  height: 200px;
+  background-image: url("../img/fotodaminhaesposa.jpg"); ;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0 auto;
+}
+#fotos_separados_do_casal_me{
+  width: 150px;
+  height: 150px;
+  background-image: url("../img/minhafoto.jpg"); ;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0 auto;
+} */
+
+
+#nossa_foto_juntos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+#fotos_separados_do_casal_he,
+#fotos_separados_do_casal_me {
+    width: 250px;
+    height: 250px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    border-radius: 50%;
+}
+
+#fotos_separados_do_casal_he {
+    background-image: url("../img/fotodaminhaesposa.jpg");
+    background-position: center 20%;
+}
+
+#fotos_separados_do_casal_me {
+    background-image: url("../img/minhafoto.jpg");
+    background-position: center 50% ;
+}
+
+
+/* fim fotos juntos */
+
+/* inicio slides de fotos */
+
+#fotos_em_slides {
+    width: 500px;
+    height: 350px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#slideshow {
+    position: relative;
+    width: 500px;
+    height: 350px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#slideshow img {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+#slideshow img.ativa {
+    opacity: 1;
+}
+
+
+/* fim slides de fotos */
+
+
+
+
 
 
 
