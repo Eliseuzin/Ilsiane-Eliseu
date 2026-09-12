@@ -1,3 +1,5 @@
+console.log("slides_fotos.js carregado");
+
 const fotos = [
     "../img/slide1.jpeg",
     "../img/slide2.jpg",
@@ -13,32 +15,27 @@ const fotos = [
 
 let indice = 0;
 
-const slide1 = document.getElementById("slide1");
-const slide2 = document.getElementById("slide2");
+const slides = document.querySelectorAll("#slideshow img");
 
-slide1.classList.add("ativa");
+// Mostra apenas o primeiro
+slides.forEach((slide, i) => {
+    slide.style.display = i === 0 ? "block" : "none";
+});
 
 setInterval(() => {
 
+    // Esconde a foto atual
+    slides[indice].style.display = "none";
+
+    // Vai para a próxima
     indice++;
 
-    if (indice >= fotos.length) {
+    // Volta para a primeira depois da última
+    if (indice >= slides.length) {
         indice = 0;
     }
 
-    if (slide1.classList.contains("ativa")) {
-
-        slide2.src = fotos[indice];
-
-        slide1.classList.remove("ativa");
-        slide2.classList.add("ativa");
-
-    } else {
-
-        slide1.src = fotos[indice];
-
-        slide2.classList.remove("ativa");
-        slide1.classList.add("ativa");
-    }
+    // Mostra a nova foto
+    slides[indice].style.display = "block";
 
 }, 4000);
