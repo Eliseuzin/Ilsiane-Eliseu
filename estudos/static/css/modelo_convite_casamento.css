@@ -121,7 +121,7 @@ main > div {
 .flor_fundo_titulos {
   width: 150px;
   height: 150px;
-  background-image: url("../img/flor_do_fundos.png");
+  background-image: url("../img/flor_do_fundos_1.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -129,6 +129,17 @@ main > div {
 }
 /* fim flor de fundo para títulos */
 
+/* inicio ramo de fundo para títulos */
+.ramo_fundo_titulos {
+  width: 150px;
+  height: 150px;
+  background-image: url("../img/fundo_ramo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0 auto;
+}
+/* fim ramo de fundo para títulos */
 
 /* inicio boas vindas */
 #boasvindas{
