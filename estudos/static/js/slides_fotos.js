@@ -1,41 +1,157 @@
-console.log("slides_fotos.js carregado");
-
-const fotos = [
-    "../img/slide1.jpeg",
-    "../img/slide2.jpg",
-    "../img/slide3.jpg",
-    "../img/slide4.jpg",
-    "../img/slide5.jpg",
-    "../img/slide6.jpg",
-    "../img/slide7.jpg",
-    "../img/slide8.jpg",
-    "../img/slide9.jpg",
-    "../img/slide10.jpg"
-];
-
-let indice = 0;
 
 const slides = document.querySelectorAll("#slideshow img");
 
-// Mostra apenas o primeiro
+let indice = 0;
+
+const indicadores = document.getElementById("indicadores");
+
+
+// ======================================
+// CRIA OS PONTINHOS
+// ======================================
+
 slides.forEach((slide, i) => {
-    slide.style.display = i === 0 ? "block" : "none";
+
+    const ponto = document.createElement("span");
+
+    ponto.addEventListener("click", () => {
+
+        indice = i;
+
+        atualizarSlide();
+
+    });
+
+    indicadores.appendChild(ponto);
+
 });
+
+
+// ======================================
+// ATUALIZA O CARROSSEL
+// ======================================
+
+function atualizarSlide() {
+
+    slides.forEach((slide, i) => {
+
+        // Remove todas as classes
+        slide.classList.remove(
+            "ativa",
+            "anterior",
+            "proxima",
+            "distante-anterior",
+            "distante-proxima"
+        );
+
+
+        // Calcula a posição em relação ao slide atual
+        let diferenca = i - indice;
+
+
+        // Corrige para o carrossel ser infinito
+        if (diferenca > slides.length / 2) {
+            diferenca -= slides.length;
+        }
+
+        if (diferenca < -slides.length / 2) {
+            diferenca += slides.length;
+        }
+
+
+        // ==================================
+        // SLIDE PRINCIPAL
+        // ==================================
+
+        if (diferenca === 0) {
+
+            slide.classList.add("ativa");
+
+        }
+
+
+        // ==================================
+        // SLIDE ANTERIOR
+        // ==================================
+
+        else if (diferenca === -1) {
+
+            slide.classList.add("anterior");
+
+        }
+
+
+        // ==================================
+        // PRÓXIMO SLIDE
+        // ==================================
+
+        else if (diferenca === 1) {
+
+            slide.classList.add("proxima");
+
+        }
+
+
+        // ==================================
+        // DISTANTE À ESQUERDA
+        // ==================================
+
+        else if (diferenca === -2) {
+
+            slide.classList.add("distante-anterior");
+
+        }
+
+
+        // ==================================
+        // DISTANTE À DIREITA
+        // ==================================
+
+        else if (diferenca === 2) {
+
+            slide.classList.add("distante-proxima");
+
+        }
+
+    });
+
+
+    // ==================================
+    // ATUALIZA OS PONTINHOS
+    // ==================================
+
+    const pontos = indicadores.querySelectorAll("span");
+
+    pontos.forEach((ponto, i) => {
+
+        ponto.classList.toggle(
+            "ativo",
+            i === indice
+        );
+
+    });
+
+}
+
+
+// Inicializa
+atualizarSlide();
+
+
+// ======================================
+// TROCA AUTOMÁTICA
+// ======================================
 
 setInterval(() => {
 
-    // Esconde a foto atual
-    slides[indice].style.display = "none";
-
-    // Vai para a próxima
     indice++;
 
-    // Volta para a primeira depois da última
     if (indice >= slides.length) {
+
         indice = 0;
+
     }
 
-    // Mostra a nova foto
-    slides[indice].style.display = "block";
+    atualizarSlide();
 
 }, 4000);
