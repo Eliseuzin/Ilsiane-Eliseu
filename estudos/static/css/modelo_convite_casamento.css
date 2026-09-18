@@ -268,46 +268,135 @@ main > div {
 }
 
 #fotos_separados_do_casal_he {
-    background-image: url("../img/fotodaminhaesposa.jpg");
-    background-position: center 20%;
+    background-image: url("../img/slide10.jpg");
+    background-position: center 45%;
 }
-
-#fotos_separados_do_casal_me {
-    background-image: url("../img/minhafoto.jpg");
-    background-position: center 50% ;
-}
-
-/* fim fotos juntos */
-
-
 
 /* inicio slides de fotos */
 
 #fotos_em_slides {
-    width: 300px;
-    height: auto;
-    margin: 0 auto;
+    width: 100%;
     overflow: hidden;
+    position: relative;
+    padding: 50px 0 30px;
 }
 
 #slideshow {
+    width: 100%;
+    height: 350px;
     position: relative;
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
 }
 
 #slideshow img {
-    inset: 0;
+    position: absolute;
+
+    width: 200px;
+    height: 280px;
 
     object-fit: cover;
 
-    opacity: 1;
-    transition: opacity 1.5s ease-in-out;
+    border-radius: 20px;
+
+    transition:
+        transform 0.8s ease,
+        opacity 0.8s ease,
+        width 0.8s ease,
+        height 0.8s ease;
+
+    opacity: 0;
+    pointer-events: none;
 }
 
+
+/* FOTO PRINCIPAL */
 #slideshow img.ativa {
+    width: 240px;
+    height: 320px;
+
     opacity: 1;
+
+    transform: translateX(0) scale(1);
+
+    z-index: 5;
+
+    border: 2px solid #d6b85a;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
 }
+
+
+/* FOTO ANTERIOR */
+#slideshow img.anterior {
+    opacity: 0.75;
+
+    transform: translateX(-230px) scale(0.85);
+
+    z-index: 3;
+}
+
+
+/* FOTO PRÓXIMA */
+#slideshow img.proxima {
+    opacity: 0.75;
+
+    transform: translateX(230px) scale(0.85);
+
+    z-index: 3;
+}
+
+
+/* DUAS FOTOS ANTES */
+#slideshow img.distante-anterior {
+    opacity: 0.25;
+
+    transform: translateX(-420px) scale(0.70);
+
+    z-index: 1;
+}
+
+
+/* DUAS FOTOS DEPOIS */
+#slideshow img.distante-proxima {
+    opacity: 0.25;
+
+    transform: translateX(420px) scale(0.70);
+
+    z-index: 1;
+}
+
+
+/* PONTINHOS */
+#indicadores {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+
+    margin-top: 10px;
+}
+
+#indicadores span {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #888;
+
+    transition: 0.3s;
+}
+
+#indicadores span.ativo {
+    background: #333;
+
+    transform: scale(1.2);
+}
+
+
+
 
 
 /* fim slides de fotos */
@@ -343,26 +432,49 @@ main > div {
 /* fim declaracao padrinhos */
 
 /* inicio localizacao da igreja */
-#localizacaodaigreja{
-  background-color: #ffffff30;
-  border-radius: 5px;
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 20px;
-  margin: 10px;
+#localizacao {
+    text-align: center;
+    padding: 50px 20px;
 }
 
-#localizacaodaigreja > div {
-  flex: 300px;
+#localizacao h2 {
+    font-family: "Great Vibes", cursive;
+    font-size: 40px;
+    font-weight: normal;
+    margin-bottom: 20px;
 }
 
-.localizacaodaigreja{
-  margin: 10px 0px 10px 0px;
-  padding: 10px 0px 10px 0px;
-  font-size: 18px;
+#nome_igreja {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+#endereco_igreja {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+#mapa {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#mapa iframe {
+    width: 100%;
+    height: 400px;
+    border-radius: 15px;
+
+}
+#nome_igreja, #endereco_igreja {
   text-align: center;
 }
+
+
+
+
+
 /* fim localizacao da igreja */
 
 /* inicio lista de presentes */
