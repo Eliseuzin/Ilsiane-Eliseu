@@ -187,9 +187,10 @@
 
                 <div class="ramo_fundo_titulos"></div>
                 <h1>Lista de Presentes</h1>
+                <!-- inicio presente usando a ideia original -->
                 <div id="listadepresentes">
-                    <!--inicio do produto-->
-                    <div class="alinharprodutoedescriçao mt-4 mb-4">
+                    <!-- inicio do produto-->
+                    <!-- <div class="alinharprodutoedescriçao mt-4 mb-4">
                       <img src="{{ url_for('static', filename='img/slide10.jpg') }}" alt="Logo Mesa 4 lugares" class="produtosham" />
                       <div class="descriçaogeral">
                         <p class="nomeham">Mesa 4 lugares</p>
@@ -204,9 +205,186 @@
                           </button>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                     <!--fim do produto-->
+
+
+                   <!-- inicio do produto-->
+                    <!-- <div class="alinharprodutoedescriçao mt-4 mb-4">
+                      <img src="{{ url_for('static', filename='img/slide10.jpg') }}" alt="Logo Ventilador" class="produtosham" />
+                      <div class="descriçaogeral">
+                        <p class="nomeham">Ventilador</p>
+                        <p class="descriçaoham"></p>
+                        <div class="preços">
+                          <p>R$ 120.99</p>
+                          <button  id="btn-Ventilador"
+                          data-name="Ventilador" data-price="120.99"
+
+                          aria-labelledby="labeldiv" class="addcart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div> -->
+                    <!--fim do produto-->
+
+
+                      <!--inicio do produto-->
+                    <!-- <div class="alinharprodutoedescriçao mt-4 mb-4">
+                      <img src="{{ url_for('static', filename='img/slide10.jpg') }}" alt="Logo Airfryer" class="produtosham" />
+                      <div class="descriçaogeral">
+                        <p class="nomeham">Airfryer </p>
+                        <p class="descriçaoham"></p>
+                        <div class="preços">
+                          <p>R$ 300.99</p>
+                          <button  id="btn-Airfryer"
+                          data-name="Airfryer " data-price="300.99"
+
+                          aria-labelledby="labeldiv" class="addcart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div> -->
+                    <!--fim do produto -->
+
+
+
+                    <!--inicio do produto-->
+                    <!-- <div class="alinharprodutoedescriçao mt-4 mb-4">
+                      <img src="{{ url_for('static', filename='img/slide10.jpg') }}" alt="Logo Liquidificador" class="produtosham" />
+                      <div class="descriçaogeral">
+                        <p class="nomeham">Liquidificador</p>
+                        <p class="descriçaoham"></p>
+                        <div class="preços">
+                          <p>R$ 200.99</p>
+                          <button  id="btn-Liquidificador"
+                          data-name="Liquidificador" data-price="200.99"
+
+                          aria-labelledby="labeldiv" class="addcart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div> -->
+                    <!--fim do produto-->
+
+
+
+                      <!--inicio do produto-->
+                    <!-- <div class="alinharprodutoedescriçao mt-4 mb-4">
+                      <img src="{{ url_for('static', filename='img/slide10.jpg') }}" alt="Logo Liquidificador" class="produtosham" />
+                      <div class="descriçaogeral">
+                        <p class="nomeham">Liquidificador</p>
+                        <p class="descriçaoham"></p>
+                        <div class="preços">
+                          <p>R$ 200.99</p>
+                          <button  id="btn-Liquidificador"
+                          data-name="Liquidificador" data-price="200.99"
+
+                          aria-labelledby="labeldiv" class="addcart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div> -->
+                    <!--fim do produto-->
+
+                    <!--inicio do produto-->
+                    <!-- <div class="alinharprodutoedescriçao mt-4 mb-4">
+                      <img src="{{ url_for('static', filename='img/slide10.jpg') }}" alt="Logo varal para roupas(chão ou teto)" class="produtosham" />
+                      <div class="descriçaogeral">
+                        <p class="nomeham">Varal(chão ou teto)</p>
+                        <p class="descriçaoham"></p>
+                        <div class="preços">
+                          <p>R$ 200.99</p>
+                          <button  id="btn-Varal"
+                          data-name="Varal" data-price="200.99"
+
+                          aria-labelledby="labeldiv" class="addcart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div> -->
+                    <!--fim do produto-->
+
+                     <!--inicio do produto-->
+                    <!-- <div class="alinharprodutoedescriçao mt-4 mb-4">
+                      <img src="{{ url_for('static', filename='img/slide10.jpg') }}" alt="Logo Maquina de lavar e secar" class="produtosham" />
+                      <div class="descriçaogeral">
+                        <p class="nomeham">Maquina de lavar e secar</p>
+                        <p class="descriçaoham"></p>
+                        <div class="preços">
+                          <p>R$ 2000.99</p>
+                          <button  id="btn-Maquina-de-lavar-e-secar"
+                          data-name="Maquina-de-lavar-e-secar" data-price="2000.99"
+
+                          aria-labelledby="labeldiv" class="addcart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div> -->
+                    <!-- fim do produto -->
                 </div>
+                <!-- fim presente usando a ideia original -->
+
+                <!-- incio do teste para multiplos produtos -->
+                   {% for presente in presentes %}
+
+                    <div class="alinharprodutoedescriçao mt-4 mb-4">
+
+                        <img
+                            src="{{ url_for('static', filename='img/' + presente.imagem) }}"
+                            alt="{{ presente.nome }}"
+                            class="produtosham"
+                        />
+
+                        <div class="descriçaogeral">
+
+                            <p class="nomeham">
+                                {{ presente.nome }}
+                            </p>
+
+                            <p class="descriçaoham">
+                                {{ presente.descricao }}
+                            </p>
+
+                            <div class="preços">
+
+                                <p>
+                                    R$ {{ "%.2f"|format(presente.preco) }}
+                                </p>
+
+                                <!-- BOTÃO -->
+                                <button
+                                    id="btn-{{ presente.id }}"
+                                    data-name="{{ presente.nome }}"
+                                    data-price="{{ presente.preco }}"
+                                    aria-labelledby="labeldiv"
+                                    class="addcart"
+                                >
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                  {% endfor %}
+                <!-- fim do teste para multiplos produtos -->
+
+
+
+
+
+
+
+
+
 
                      <!-- inico do modal(dentro do meu carrinho) -->
                     <div id="dentrodocarrinho">
