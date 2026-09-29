@@ -6,9 +6,11 @@ app = Flask(
     static_folder="estudos/static"
 )
 
-from estudos import routes
+from estudos.routes import routes
 
-# print(app.url_map)
+app.register_blueprint(routes)
+
+print(app.url_map)
 
 if __name__ == "__main__":
     app.run(debug=True)

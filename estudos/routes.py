@@ -1,14 +1,13 @@
-from app import app
-from flask import render_template
+from flask import Blueprint, render_template
 from lista_presentes import presentes
 
-print("========== ROUTES.PY FOI CARREGADO ==========")
-print("PRESENTES:", presentes)
+routes = Blueprint("routes", __name__)
 
 
-@app.route("/")
+@routes.route("/")
 def inicio():
     print("========== ENTROU NA ROTA INICIO ==========")
+    print("PRESENTES:", presentes)
 
     return render_template(
         "index.html",
