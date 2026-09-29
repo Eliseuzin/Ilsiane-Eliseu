@@ -46,7 +46,7 @@
     </nav>
       <main>
         <section>
-          <article>
+slides/          <article>
                   <div id="mainimagem">
 
                       <h1>
@@ -127,16 +127,16 @@
                 <div id="fotos_em_slides"> 
                 <div id="slideshow">
 
-                  <img id="slide1" src="../static/img/slide1.jpeg" alt="Foto do casal">
-                  <img id="slide2" src="../static/img/slide2.jpg" alt="Foto do casal">
-                  <img id="slide3" src="../static/img/slide3.jpg" alt="Foto do casal">
-                  <img id="slide4" src="../static/img/slide4.jpg" alt="Foto do casal">
-                  <img id="slide5" src="../static/img/slide5.jpg" alt="Foto do casal">
-                  <img id="slide6" src="../static/img/slide6.jpg" alt="Foto do casal">
-                  <img id="slide7" src="../static/img/slide7.jpg" alt="Foto do casal">
-                  <img id="slide8" src="../static/img/slide8.jpg" alt="Foto do casal">
-                  <img id="slide9" src="../static/img/slide9.jpg" alt="Foto do casal">
-                  <img id="slide10" src="../static/img/slide10.jpg" alt="Foto do casal">
+                  <img id="slide1" src="../static/img/slides/slide1.jpeg" alt="Foto do casal">
+                  <img id="slide2" src="../static/img/slides/slide2.jpg" alt="Foto do casal">
+                  <img id="slide3" src="../static/img/slides/slide3.jpg" alt="Foto do casal">
+                  <img id="slide4" src="../static/img/slides/slide4.jpg" alt="Foto do casal">
+                  <img id="slide5" src="../static/img/slides/slide5.jpg" alt="Foto do casal">
+                  <img id="slide6" src="../static/img/slides/slide6.jpg" alt="Foto do casal">
+                  <img id="slide7" src="../static/img/slides/slide7.jpg" alt="Foto do casal">
+                  <img id="slide8" src="../static/img/slides/slide8.jpg" alt="Foto do casal">
+                  <img id="slide9" src="../static/img/slides/slide9.jpg" alt="Foto do casal">
+                  <img id="slide10" src="../static/img/slides/slide10.jpg" alt="Foto do casal">
                 </div>   
                 <div id="indicadores"></div>
                </div>
@@ -335,7 +335,7 @@
                      {% for presente in presentes %}
                           <div class="alinharprodutoedescriçao mt-4 mb-4">
                               <img
-                                  src="{{ url_for('static', filename='img/' + presente.imagem) }}"
+                                  src="{{ url_for('static', filename='img/presentes/' + presente.imagem) }}"
                                   alt="{{ presente.nome }}"
                                   class="produtosham"
                               />
