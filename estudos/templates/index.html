@@ -331,59 +331,45 @@
                 <!-- fim presente usando a ideia original -->
 
                 <!-- incio do teste para multiplos produtos -->
-                   {% for presente in presentes %}
+                   <div id="listadepresentes1">
+                       <h3>OK, CARREGOU ESTÁ PARTE</h3>
+                       <p>Total de presentes: {{ presentes|length }}</p>
 
-                    <div class="alinharprodutoedescriçao mt-4 mb-4">
-
-                        <img
-                            src="{{ url_for('static', filename='img/' + presente.imagem) }}"
-                            alt="{{ presente.nome }}"
-                            class="produtosham"
-                        />
-
-                        <div class="descriçaogeral">
-
-                            <p class="nomeham">
-                                {{ presente.nome }}
-                            </p>
-
-                            <p class="descriçaoham">
-                                {{ presente.descricao }}
-                            </p>
-
-                            <div class="preços">
-
-                                <p>
-                                    R$ {{ "%.2f"|format(presente.preco) }}
-                                </p>
-
-                                <!-- BOTÃO -->
-                                <button
-                                    id="btn-{{ presente.id }}"
-                                    data-name="{{ presente.nome }}"
-                                    data-price="{{ presente.preco }}"
-                                    aria-labelledby="labeldiv"
-                                    class="addcart"
-                                >
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                  {% endfor %}
+                     {% for presente in presentes %}
+                          <div class="alinharprodutoedescriçao mt-4 mb-4">
+                              <img
+                                  src="{{ url_for('static', filename='img/' + presente.imagem) }}"
+                                  alt="{{ presente.nome }}"
+                                  class="produtosham"
+                              />
+                              <div class="descriçaogeral">
+                                  <p class="nomeham">
+                                      {{ presente.nome }}
+                                  </p>
+                                  <p class="descriçaoham">
+                                      {{ presente.descricao }}
+                                  </p>
+                                  <div class="preços">
+                                      <p>
+                                          R$ {{ "%.2f"|format(presente.preco) }}
+                                      </p>
+                                      <!-- BOTÃO -->
+                                      <button
+                                          id="btn-{{ presente.id }}"
+                                          data-name="{{ presente.nome }}"
+                                          data-price="{{ presente.preco }}"
+                                          aria-labelledby="labeldiv"
+                                          class="addcart"
+                                      >
+                                          <i class="fa-solid fa-cart-shopping"></i>
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                     
+                      {% endfor %}
+                   </div>
                 <!-- fim do teste para multiplos produtos -->
-
-
-
-
-
-
-
-
 
 
                      <!-- inico do modal(dentro do meu carrinho) -->

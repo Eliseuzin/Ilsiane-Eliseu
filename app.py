@@ -1,5 +1,4 @@
-from flask import Flask, render_template
-from lista_presentes import presentes
+from flask import Flask
 
 app = Flask(
     __name__,
@@ -7,11 +6,9 @@ app = Flask(
     static_folder="estudos/static"
 )
 
+from estudos import routes
 
-@app.route("/")
-def inicio():
-    return render_template("index.html")
-
+# print(app.url_map)
 
 if __name__ == "__main__":
     app.run(debug=True)

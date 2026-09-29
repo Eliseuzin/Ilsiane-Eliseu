@@ -495,6 +495,25 @@ main > div {
 /* fim lista de presentes */
 
 
+
+/* inicio lista de presentes1 */
+#listadepresentes1{
+  background-color: #ffffff30;
+  border-radius: 5px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 10px;
+}
+
+#listadepresentes1 > div {
+  flex: 300px;
+}
+
+/* fim lista de presentes1 */
+
+
 /* inicio confirmaçao de presença */
 #confirmarpresenca{
   background-color: #ffffff30;
