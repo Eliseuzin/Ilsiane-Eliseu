@@ -91,11 +91,120 @@ presentes=[
         "id":13,
         "nome":"Jogo Para Churrasco Polywood Inox 3 Peças ",
         "descricao": "",
-        "preco": 94.99,
+        "preco": 104.99,
         "imagem": "Jogo_Para_Churrasco_Polywood.jpg"
     },
 
+    {
+        "id":13,
+        "nome":"Ajude-nos a pagar o casamento",
+        "descricao": "",
+        "preco": 84.99,
+        "imagem": "Jogo_Para_Churrasco_Polywood.jpg"
+    },
 
+    {
+        "id":13,
+        "nome":"Batedeira Planetária Bowl 750W",
+        "descricao": "",
+        "preco": 534.99,
+        "imagem": "Batedeira_Planetaria_Bowl_750W.jpg"
+    },
 
+    {
+        "id":13,
+        "nome":"BatedeirFaqueiro Bellagio 24 peças - Brinox",
+        "descricao": "",
+        "preco": 177.99,
+        "imagem": "Faqueiro_Bellagio_24_pecas.jpg"
+    },
+
+    {
+        "id":13,
+        "nome":"Faqueiro",
+        "descricao": "",
+        "preco": 158.99,
+        "imagem": "faqueiro-em-aco-inoxidavel-75-pecas.jpg"
+    },
+
+    {
+        "id":13,
+        "nome":"Escorredor de Louças Inox Madri Cromado ",
+        "descricao": "",
+        "preco": 128.99,
+        "imagem": "Escorredor_de_Loucas_Inox_Madri.jpg"
+    },
+
+    {
+        "id":13,
+        "nome":"Panela de Pressão Vapt 4,5 Litros - Brinox",
+        "descricao": "",
+        "preco": 208.99,
+        "imagem": "Panela_de_Pressao_Vapt.jpg"
+    },
+
+    {
+        "id":13,
+        "nome":"Conjunto de bowl",
+        "descricao": "",
+        "preco": 68.99,
+        "imagem": "conjunto-de-bowl-6-pecas.jpg"
+    },
+
+    {
+        "id":13,
+        "nome":"Aparelho de Jantar",
+        "descricao": "",
+        "preco": 77.99,
+        "imagem": "aparelho_de_jantar.webp"
+    },
+
+    {
+        "id":13,
+        "nome":"Conjunto Assadeiras 6 Peças de Vidro",
+        "descricao": "",
+        "preco": 137.99,
+        "imagem": "assadeiras.webp"
+    },
+
+    {
+        "id":13,
+        "nome":"Kit 3 Travessas Marinex Opaline",
+        "descricao": "",
+        "preco": 69.99,
+        "imagem": "travessas.webp"
+    },
+
+    {
+        "id":13,
+        "nome":"Kit 16 Potes Herméticos Croix",
+        "descricao": "",
+        "preco": 138.99,
+        "imagem": "potes.webp"
+    },
+
+    {
+        "id":13,
+        "nome":"Jogo 12 Potes Hermetico Vidro",
+        "descricao": "",
+        "preco": 146.99,
+        "imagem": "potes_vidros.webp"
+    },
+
+    {
+        "id":13,
+        "nome":"    Espelho Decorativo",
+        "descricao": "",
+        "preco": 68.99,
+        "imagem": "espelho_decorativo.webp"
+    },
+
+    {
+        "id":13,
+        "nome":"Tapete",
+        "descricao": "",
+        "preco": 89.99,
+        "imagem": "tapete.jpg"
+    },
 
 ]
