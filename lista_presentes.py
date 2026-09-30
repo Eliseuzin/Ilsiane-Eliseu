@@ -1,21 +1,5 @@
 presentes=[
     {
-        "id": 1,
-        "nome":"Mesa Jantar 4 Lugares Industrial Retangular 115 Cm",
-        "descricao":"",
-        "preco": 333.99,
-        "imagem":"Mesa_Jantar_4_Lugares_Industrial_Retangular_115_Cm.webp"
-    },
-
-    {
-        "id": 2,
-        "nome":"Sala Jantar Estofada Mesa Tampo Vidro 4 Cadeiras Madesa",
-        "descricao":"",
-        "preco": 846.99,
-        "imagem":"Sala_Jantar_Estofada_Mesa_Tampo_Vidro_4_Cadeiras_Madesa.webp"
-    },
-
-    {
         "id":3,
         "nome":"Liquidificador Turbo Power Mondial 550W",
         "descricao":"",
@@ -48,46 +32,6 @@ presentes=[
     },
 
     {
-        "id":7,
-        "nome":"Lava E Seca Samsung Wd11m Com Digital Inverter Inox 11kg Cor Inox look",
-        "descricao": "",
-        "preco": 3699.99,
-        "imagem": "Lava_E_Seca_Samsung_Digital_Inverter_Inox_11kg.webp"
-    },
-
-    {
-        "id":8,
-        "nome":"Lava E Seca 10,5kg Titanium Inverter Midea 110v Cinza-escuro",
-        "descricao": "",
-        "preco": 3199.99,
-        "imagem": "Lava_E_Seca_Titanium_Inverter_Midea.webp"
-    },
-
-    {
-        "id":9,
-        "nome":"Lava e Seca conectada Healthguard Titanium 13 kg Cinza escuro Midea",
-        "descricao": "",
-        "preco": 3299.99,
-        "imagem": "Lava_e_Seca_conectada_Healthguard_Titanium_Cinza_escuro_Midea.webp"
-    },
-
-    {
-        "id":10,
-        "nome":"Sofá Com Usb Retrátil E Reclinável Eureka 2,00m Cinza",
-        "descricao": "",
-        "preco": 1325.99,
-        "imagem": "Sofá_Com_Usb_Retrátil_E_Reclinável_Cinza.webp"
-    },
-
-    {
-        "id":11,
-        "nome":"Sofá-cama Retrátil Reclinável 3 Lugares Linho 2,00m Ipanema Cor Cinza",
-        "descricao": "",
-        "preco": 1336.99,
-        "imagem": "Sofá_cama_Retrátil_Reclinável_3_Lugares.webp"
-    },
-
-    {
         "id":12,
         "nome":"Ventilado De Coluna Turbo 6 Pás 40cm Preto",
         "descricao": "",
@@ -104,49 +48,54 @@ presentes=[
     },
 
     {
-        "id":14,
-        "nome":"Lua de Mel em Monte Verde 5 dias",
-        "descricao": "Entre tantos sonhos que queremos realizar juntos,"
-        " está o desejo de conhecer Monte Verde e viver alguns dias especiais nesse lugar tão encantador.",
-        "preco": 2700.99,
-        "imagem": "Monte_Verde.webp"
+        "id":13,
+        "nome":"Lixeira para cozinha",
+        "descricao": "",
+        "preco": 69.99,
+        "imagem": "lixeira-para-cozinha-5-litros.jpg"
     },
 
     {
-        "id":15,
-        "nome":"Lua de Mel em Campos do Jordão 5 dias",
-        "descricao": "Mais do que um presente, será uma oportunidade de começarmos"
-        " essa nova fase da nossa vida juntos com uma viagem especial e cheia de carinho.",
-        "preco": 2900.99,
-        "imagem": "Campos_do_jordao.jpg"
+        "id":13,
+        "nome":"Jogo de acessórios para banheiro",
+        "descricao": "",
+        "preco": 79.99,
+        "imagem": "jogo-de-acessorios-para-banheiro-6-pecas.jpg"
     },
 
     {
-        "id":16,
-        "nome":"Passagens ida/volta para Monte Verde",
-        "descricao": "Mais do que um presente, será uma oportunidade de começarmos"
-        " essa nova fase da nossa vida juntos com uma viagem especial e cheia de carinho.",
-        "preco": 1200.99,
-        "imagem": "paisagens_monte.webp"
+        "id":13,
+        "nome":"Toalha de Rosto Egitto Elegance 40 cm x 90 cm",
+        "descricao": "",
+        "preco": 64.99,
+        "imagem": "Toalha_de_Rosto_egitto_elegance.jpg"
     },
 
     {
-        "id":17,
-        "nome":"Passagens ida/volta para Campos do Jordão",
-        "descricao": "Os valores variam bastante conforme a data, empresa,"
-        "horário e principalmente se há necessidade de conexão.",
-        "preco": 1300.99,
-        "imagem": "paisagens_campos.jpg"
+        "id":13,
+        "nome":"Ferro a Vapor FX2200 1200W - Black+Decker",
+        "descricao": "",
+        "preco": 134.99,
+        "imagem": "Ferro_a_Vapor_FX2200_1200W.jpg"
     },
 
     {
-        "id":18,
-        "nome":"Alimentação durante os 5 dias",
-        "descricao": "O destino combina com perfeição o aconchego da comida mineira"
-        "de raiz com a sofisticação da culinária europeia (especialmente fondues, trutas, strudels e pratos alemães).",
-        "preco": 1200.99,
-        "imagem": "alimentacao.webp"
+        "id":13,
+        "nome":"Afiador de Faca",
+        "descricao": "",
+        "preco": 94.99,
+        "imagem": "afiadordefacas.jpg"
     },
+
+    {
+        "id":13,
+        "nome":"Jogo Para Churrasco Polywood Inox 3 Peças ",
+        "descricao": "",
+        "preco": 94.99,
+        "imagem": "Jogo_Para_Churrasco_Polywood.jpg"
+    },
+
+
 
 
 ]
