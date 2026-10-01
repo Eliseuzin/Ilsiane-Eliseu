@@ -100,7 +100,7 @@ presentes=[
         "nome":"Ajude-nos a pagar o casamento",
         "descricao": "",
         "preco": 84.99,
-        "imagem": "Jogo_Para_Churrasco_Polywood.jpg"
+        "imagem": "Help_casamento.jpg"
     },
 
     {
@@ -213,6 +213,14 @@ presentes=[
         "descricao": "",
         "preco": 26.99,
         "imagem": "Acendedor_Plasma_Usb_Recarregável_Para_Fogão.webp"
+    },
+
+    {
+        "id":28,
+        "nome":"Ajude-nos a pagar a Lua de Mel",
+        "descricao": "",
+        "preco": 87.99,
+        "imagem": "Help_casamento.jpg"
     },
 
 
