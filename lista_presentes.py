@@ -1,6 +1,6 @@
 presentes=[
     {
-        "id":3,
+        "id":1,
         "nome":"Liquidificador Turbo Power Mondial 550W",
         "descricao":"",
         "preco": 180.99,
@@ -8,7 +8,7 @@ presentes=[
     },
 
     {
-        "id":4,
+        "id":2,
         "nome":"Multiprocessador Turbo Chef 3 Em 1 Mondial 1000W",
         "descricao":"",
         "preco": 300.99,
@@ -16,7 +16,7 @@ presentes=[
     },
 
     {
-        "id":5,
+        "id":3,
         "nome":"Varal de chão",
         "descricao": "",
         "preco": 115.99,
@@ -24,7 +24,7 @@ presentes=[
     },
 
     {
-        "id":6,
+        "id":4,
         "nome":"Varal Tradicional de teto 80cm",
         "descricao": "",
         "preco": 181.99,
@@ -32,7 +32,7 @@ presentes=[
     },
 
     {
-        "id":12,
+        "id":5,
         "nome":"Ventilado De Coluna Turbo 6 Pás 40cm Preto",
         "descricao": "",
         "preco": 196.99,
@@ -40,7 +40,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":6,
         "nome":"CasaFlow Ventilador de Teto 42 com Luz LED Integrada",
         "descricao": "",
         "preco": 269.99,
@@ -48,7 +48,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":7,
         "nome":"Lixeira para cozinha",
         "descricao": "",
         "preco": 69.99,
@@ -56,7 +56,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":8,
         "nome":"Jogo de acessórios para banheiro",
         "descricao": "",
         "preco": 79.99,
@@ -64,7 +64,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":9,
         "nome":"Toalha de Rosto Egitto Elegance 40 cm x 90 cm",
         "descricao": "",
         "preco": 64.99,
@@ -72,7 +72,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":10,
         "nome":"Ferro a Vapor FX2200 1200W - Black+Decker",
         "descricao": "",
         "preco": 134.99,
@@ -80,7 +80,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":11,
         "nome":"Afiador de Faca",
         "descricao": "",
         "preco": 94.99,
@@ -88,7 +88,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":12,
         "nome":"Jogo Para Churrasco Polywood Inox 3 Peças ",
         "descricao": "",
         "preco": 104.99,
@@ -104,7 +104,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":14,
         "nome":"Batedeira Planetária Bowl 750W",
         "descricao": "",
         "preco": 534.99,
@@ -112,7 +112,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":15,
         "nome":"BatedeirFaqueiro Bellagio 24 peças - Brinox",
         "descricao": "",
         "preco": 177.99,
@@ -120,7 +120,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":16,
         "nome":"Faqueiro",
         "descricao": "",
         "preco": 158.99,
@@ -128,7 +128,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":17,
         "nome":"Escorredor de Louças Inox Madri Cromado ",
         "descricao": "",
         "preco": 128.99,
@@ -136,7 +136,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":18,
         "nome":"Panela de Pressão Vapt 4,5 Litros - Brinox",
         "descricao": "",
         "preco": 208.99,
@@ -144,7 +144,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":19,
         "nome":"Conjunto de bowl",
         "descricao": "",
         "preco": 68.99,
@@ -152,7 +152,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":20,
         "nome":"Aparelho de Jantar",
         "descricao": "",
         "preco": 77.99,
@@ -160,7 +160,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":21,
         "nome":"Conjunto Assadeiras 6 Peças de Vidro",
         "descricao": "",
         "preco": 137.99,
@@ -168,7 +168,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":22,
         "nome":"Kit 3 Travessas Marinex Opaline",
         "descricao": "",
         "preco": 69.99,
@@ -176,7 +176,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":23,
         "nome":"Kit 16 Potes Herméticos Croix",
         "descricao": "",
         "preco": 138.99,
@@ -184,7 +184,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":24,
         "nome":"Jogo 12 Potes Hermetico Vidro",
         "descricao": "",
         "preco": 146.99,
@@ -192,7 +192,7 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":25,
         "nome":"    Espelho Decorativo",
         "descricao": "",
         "preco": 68.99,
@@ -200,11 +200,20 @@ presentes=[
     },
 
     {
-        "id":13,
+        "id":26,
         "nome":"Tapete",
         "descricao": "",
         "preco": 89.99,
         "imagem": "tapete.jpg"
     },
+
+    {
+        "id":27,
+        "nome":"    Acendedor Plasma Usb Recarregável Para Fogão",
+        "descricao": "",
+        "preco": 26.99,
+        "imagem": "Acendedor_Plasma_Usb_Recarregável_Para_Fogão.webp"
+    },
+
 
 ]
