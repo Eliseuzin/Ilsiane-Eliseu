@@ -210,13 +210,9 @@ main > div {
 .contador small {
     font-size: 14px;
     
-
 }
 
-
 /* fim contagemre gressiva */
-
-
 
 /*inicio declaraca ocasal */
 
@@ -395,16 +391,7 @@ main > div {
     transform: scale(1.2);
 }
 
-
-
-
-
 /* fim slides de fotos */
-
-
-
-
-
 
 
 /* inicio declaracao padrinhos */
@@ -471,10 +458,6 @@ main > div {
   text-align: center;
 }
 
-
-
-
-
 /* fim localizacao da igreja */
 
 /* inicio lista de presentes */
@@ -511,7 +494,141 @@ main > div {
   flex: 300px;
 }
 
+
+.alinharprodutoedescriçao {
+  /* display: flex; */
+  border-radius: 5px;
+  border: 1px solid var(--cor4);
+  margin: 10px;
+
+}
+
+.descriçaogeral {
+  padding-left: 15px;
+  color: var(--cor1);
+  /* text-shadow: 2px 2px 2px rgb(255, 0, 0); */
+  font-size: 16px;
+}
+
+.preços {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px
+}
+
+
+#imagens_presentes{
+  border-radius: 20px;
+}
+
 /* fim lista de presentes1 */
+
+/* inicio meu carrinho */
+
+#footerCarrinho{
+  background-color: var(--cor5);
+  color: #ffffff90;
+  text-align: center;
+  padding: 3px;
+  margin-top: 10px;
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  left: 0%;
+  z-index: 999;
+  display: none;
+}
+
+#meucarrinho{
+  background-color: #ffffff90 ;
+  color: black;
+  text-align: center;
+  padding: 3px;
+  margin: 5px;
+}
+
+
+#dentrodocarrinho {
+  background-color: rgba(0, 0, 0, 0.76);
+  text-align: center;
+  justify-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  border: solid 3px var(--cor5); ;
+  padding-top: 15px;
+
+  display: none;
+}
+
+
+#subdentrodocarrinho {
+  color: aliceblue;
+  background-color: #ffffff1c;
+  padding: 10px;
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  border-radius: 20px;
+  border: solid 2px var(--cor5);
+  /* min-width: 200px; */
+  /* display: none; */
+}
+
+#submeucarrinho {
+  display: inline-block;
+  justify-content: space-between;
+  font-style: bold;
+  /* display: none; */
+}
+#rodape-carrinho{
+  border-top: 1px solid #555;
+  padding-top: 10px;
+}
+
+
+/* fim meu carrinho */
+
+
+
+/* inicio voltar/presentear carrinho */
+
+#fim-step-resumo {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+#voltar-carrinho {
+    border-radius: 5px;
+    padding: 5px;
+    font-family: "Courier New", "Courier", monospace;
+    background-color: rgba(192, 12, 12, 0.548);
+    color: #ffffff99;
+}
+
+#presentear {
+    border-radius: 5px;
+    padding: 5px;
+    font-family: "Courier New", "Courier", monospace;
+    background-color: rgba(24, 104, 24, 0.616);
+    color: #ffffff99;
+}
+
+/* fim voltar/presentear carrinho */
+
+
+
+
+
+
 
 
 /* inicio confirmaçao de presença */
@@ -547,16 +664,6 @@ main > div {
   flex: 300px;
 }
 /* fim recados */
-
-
-
-/* h1 {
-  text-align: center;
-  font-family: "Italianno", cursive;
-  font-size: 60px;
-  color: var(--cor1);
-} */
-
 
 h1 {
   text-align: center;

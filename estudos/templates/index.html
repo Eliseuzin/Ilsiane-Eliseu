@@ -331,7 +331,7 @@
                    <div id="listadepresentes1">
                      {% for presente in presentes %}
                           <div class="alinharprodutoedescriçao mt-4 mb-4">
-                              <img
+                              <img id="imagens_presentes"
                                   src="{{ url_for('static', filename='img/presentes/' + presente.imagem) }}"
                                   alt="{{ presente.nome }}"
                                   class="produtosham"
@@ -369,7 +369,7 @@
                     <div id="dentrodocarrinho">
                         
                         <div id="subdentrodocarrinho">                
-                            <h4>Meu carrinho</h4>
+                            <h4>Meu(s) Presente(s)</h4>
                             <!-- barra de progresso do meu carrinho -->
 
                             <!-- inicio passo 1 -->
@@ -381,7 +381,7 @@
 
                                     <div id="resumo">
                                 
-                                    <h5>Resumo</h5>
+                                    <h5>Resumo:</h5>
                                 
                                     <!-- valor da taxa de entrega -->
                                 
@@ -400,8 +400,8 @@
                                 
                                     </div>
                                     <div id="fim-step-resumo">
-                                      <button type="button" id="voltar-step3">Voltar</button>
-                                      <button type="button" id="Finalizar">Finalizar pedido</button>
+                                      <button type="button" id="voltar-carrinho">Voltar</button>
+                                      <button type="button" id="presentear">Presentear</button>
                                     </div>
 
                               </div>                   
@@ -427,14 +427,15 @@
           </article>
         </section>
       </main>
+        <div id="footerCarrinho">
+          <button id="meucarrinho">
+            (<span id="quantidadecarinho">0</span>)
+            Veja meus Presentes
+            <i class="fa-solid fa-cart-shopping"></i>
+          </button>
+        </div>
      <footer>Forever, God, Ilsiane de Araujo Silva and Eliseu Matos da Silva</footer>
-     <footer>
-        <button id="meucarrinho">
-          (<span id="quantidadecarinho">0</span>)
-          Veja meus Presentes
-          <i class="fa-solid fa-cart-shopping"></i>
-        </button>
-     </footer>
+
      <script src="../static/js/slides_fotos.js"></script>
      <script src="../static/js/contagemregressiva.js"></script>
       <!-- <script src="contagem_2_regressiva.js"></script> -->
