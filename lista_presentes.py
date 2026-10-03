@@ -97,14 +97,6 @@ presentes=[
 
     {
         "id":13,
-        "nome":"Ajude-nos a pagar o casamento",
-        "descricao": "",
-        "preco": 84.99,
-        "imagem": "Help_casamento.jpg"
-    },
-
-    {
-        "id":14,
         "nome":"Batedeira Planetária Bowl 750W",
         "descricao": "",
         "preco": 534.99,
@@ -112,7 +104,7 @@ presentes=[
     },
 
     {
-        "id":15,
+        "id":14,
         "nome":"BatedeirFaqueiro Bellagio 24 peças - Brinox",
         "descricao": "",
         "preco": 177.99,
@@ -120,7 +112,7 @@ presentes=[
     },
 
     {
-        "id":16,
+        "id":15,
         "nome":"Faqueiro",
         "descricao": "",
         "preco": 158.99,
@@ -128,7 +120,7 @@ presentes=[
     },
 
     {
-        "id":17,
+        "id":16,
         "nome":"Escorredor de Louças Inox Madri Cromado ",
         "descricao": "",
         "preco": 128.99,
@@ -136,7 +128,7 @@ presentes=[
     },
 
     {
-        "id":18,
+        "id":17,
         "nome":"Panela de Pressão Vapt 4,5 Litros - Brinox",
         "descricao": "",
         "preco": 208.99,
@@ -144,7 +136,7 @@ presentes=[
     },
 
     {
-        "id":19,
+        "id":18,
         "nome":"Conjunto de bowl",
         "descricao": "",
         "preco": 68.99,
@@ -152,7 +144,7 @@ presentes=[
     },
 
     {
-        "id":20,
+        "id":19,
         "nome":"Aparelho de Jantar",
         "descricao": "",
         "preco": 77.99,
@@ -160,7 +152,7 @@ presentes=[
     },
 
     {
-        "id":21,
+        "id":20,
         "nome":"Conjunto Assadeiras 6 Peças de Vidro",
         "descricao": "",
         "preco": 137.99,
@@ -168,7 +160,7 @@ presentes=[
     },
 
     {
-        "id":22,
+        "id":21,
         "nome":"Kit 3 Travessas Marinex Opaline",
         "descricao": "",
         "preco": 69.99,
@@ -176,7 +168,7 @@ presentes=[
     },
 
     {
-        "id":23,
+        "id":22,
         "nome":"Kit 16 Potes Herméticos Croix",
         "descricao": "",
         "preco": 138.99,
@@ -184,7 +176,7 @@ presentes=[
     },
 
     {
-        "id":24,
+        "id":23,
         "nome":"Jogo 12 Potes Hermetico Vidro",
         "descricao": "",
         "preco": 146.99,
@@ -192,7 +184,7 @@ presentes=[
     },
 
     {
-        "id":25,
+        "id":24,
         "nome":"    Espelho Decorativo",
         "descricao": "",
         "preco": 68.99,
@@ -200,7 +192,7 @@ presentes=[
     },
 
     {
-        "id":26,
+        "id":25,
         "nome":"Tapete",
         "descricao": "",
         "preco": 89.99,
@@ -208,20 +200,11 @@ presentes=[
     },
 
     {
-        "id":27,
+        "id":26,
         "nome":"    Acendedor Plasma Usb Recarregável Para Fogão",
         "descricao": "",
         "preco": 26.99,
         "imagem": "Acendedor_Plasma_Usb_Recarregável_Para_Fogão.webp"
     },
-
-    {
-        "id":28,
-        "nome":"Ajude-nos a pagar a Lua de Mel",
-        "descricao": "",
-        "preco": 87.99,
-        "imagem": "Help_casamento.jpg"
-    },
-
 
 ]

@@ -562,7 +562,7 @@ main > div {
   border: solid 3px var(--cor5); ;
   padding-top: 15px;
 
-  /* display: none; */
+  display: none;
 }
 
 

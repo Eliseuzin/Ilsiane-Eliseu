@@ -1,16 +1,24 @@
-const Meucarrinho = document.getElementById("meucarrinho");
 
+// inicio abrir o carrinho de presentes
+const abrircarrinho = document.getElementById("meucarrinho");
+const dentrodomeucarrinho = document.getElementById("dentrodocarrinho");
+
+abrircarrinho.addEventListener("click", (event) => {
+  dentrodomeucarrinho.style.display = "block";
+});
+
+// inicio abrir o carrinho de presentes
 
 
 // inicio adicionar item ao carrinho
-Menugeral.addEventListener("click", (event) => {
-  const parentButtom = event.target.closest(".addcart");
-  if (parentButtom) {
-    const name = parentButtom.getAttribute("data-name");
-    const price = parseFloat(parentButtom.getAttribute("data-price"));
-    addinmycar(name, price);
-  }
-});
+// Menugeral.addEventListener("click", (event) => {
+//   const parentButtom = event.target.closest(".addcart");
+//   if (parentButtom) {
+//     const name = parentButtom.getAttribute("data-name");
+//     const price = parseFloat(parentButtom.getAttribute("data-price"));
+//     addinmycar(name, price);
+//   }
+// });
 // fim adicionar item ao carrinho
 
 
