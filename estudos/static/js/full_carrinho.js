@@ -4,10 +4,20 @@ const abrircarrinho = document.getElementById("meucarrinho");
 const dentrodomeucarrinho = document.getElementById("dentrodocarrinho");
 
 abrircarrinho.addEventListener("click", (event) => {
+  console.log("clicou no carrinho");
   dentrodomeucarrinho.style.display = "block";
 });
 
 // inicio abrir o carrinho de presentes
+
+
+// Inicio eventos para abrir/fechar carrinho e com click fora dele
+dentrodomeucarrinho.addEventListener("click", (event) => {
+  if (event.target === dentrodomeucarrinho || event.target === voltar_carrinho) {
+    dentrodomeucarrinho.style.display = "none";
+  }
+});
+// fim eventos para abrir/fechar carrinho e com click fora dele
 
 
 // inicio adicionar item ao carrinho
