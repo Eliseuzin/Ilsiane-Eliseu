@@ -1,4 +1,4 @@
-* {
+*{
   margin: 0%;
 }
 :root {
@@ -24,11 +24,6 @@ main {
   margin: auto;
   max-width: 800px;
   min-height: 320px;
-  /* background-color: aliceblue; */
-  /* background-image: url("../img/fundo_entrada.png");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover; */
   border-radius: 5px;
 }
 header {
@@ -37,7 +32,6 @@ header {
   font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 10px;
   padding: 10px;
-  /* background-image: linear-gradient(to bottom, var(--cor2), var(--cor1)); */
   background-image: linear-gradient(to bottom, var(--cor5), var(--cor6));
   border-bottom: 1px solid var(--cor4);
 }
@@ -63,15 +57,6 @@ nav a:hover {
 nav a:active {
   color: var(--cor1);
 }
-
-/* main {
-  background-color: #ffffff30;
-  border-radius: 5px;
-  margin: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 11px;
-} */
 
 main > div {
   flex: 500px;
@@ -251,22 +236,20 @@ main > div {
     gap: 30px;
 }
 
-#fotos_separados_do_casal_he,
-#fotos_separados_do_casal_me {
+#fotos_forever_do_casal{
     width: 250px;
     height: 250px;
-
+    background-image: url("../img/slides/slide1.jpeg");
+    background-color: var(--cor4);
+    background-position: center 45%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 
     border-radius: 50%;
+
 }
 
-#fotos_separados_do_casal_he {
-    background-image: url("../img/slide10.jpg");
-    background-position: center 45%;
-}
 
 /* inicio slides de fotos */
 
