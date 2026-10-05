@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 from lista_presentes import presentes
+from estudos.models import Pagamento, db
 
 routes = Blueprint("routes", __name__)
 
