@@ -1,4 +1,5 @@
 const PresentesGeral= document.getElementById("listadepresentes1");
+const botaoPresentear = document.getElementById("presentear");
 const abrircarrinho = document.getElementById("meucarrinho");
 const dentrodomeucarrinho = document.getElementById("dentrodocarrinho");
 const FooterMeusPresentes = document.getElementById("footerCarrinho");
@@ -152,48 +153,48 @@ function removeritens(name) {
 // // fim funcao remover itens
 
 
+// inico botao presentear para o checkout
 
 
+botaoPresentear.addEventListener("click", async () => {
 
+    if (listPresentes.length === 0) {
+        alert("Adicione pelo menos um presente ao carrinho.");
+        return;
+    }
 
+    try {
 
+        const resposta = await fetch("/criar_pagamento", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                presentes: listPresentes
+            })
+        });
 
+        const dados = await resposta.json();
 
-// // inicio calcular subtotal e total 
+        if (!resposta.ok) {
+            console.error("Erro:", dados);
+            alert("Não foi possível iniciar o pagamento.");
+            return;
+        }
 
-// function updatecarrinho() {
-//   let subtotal = 0;
-//   let total= 0;
-//   submeucarrinho.innerHTML = "";
+        console.log("Preferência criada:", dados);
 
-//   listcar.forEach((item) => {
-//     const incluirosprodutos = document.createElement("div");
-//     incluirosprodutos.className = "estilizarprodutos";
-//     incluirosprodutos.innerHTML = `
-//       <div>
-//         <p>${item.name}</p>
-//         <p>Qtds: ${item.quantity}</p>
-//         <p>R$: ${item.price.toFixed(2)}</p>
-//         <button class='removeritem' data-name="${item.name}">Remover</button>
-//       </div>`;
+        window.location.href = dados.link;
 
-//     subtotal += item.price * item.quantity;
-//     submeucarrinho.appendChild(incluirosprodutos);
-//   });
+    } catch (erro) {
 
+        console.error("Erro ao criar pagamento:", erro);
 
-//   Subtotal.textContent = `Sub total: ${subtotal.toLocaleString("pt-BR", {
-//     style: "currency",
-//     currency: "BRL"
-//   })}`;
+        alert("Erro ao conectar com o servidor.");
+    }
 
+});
 
-//   total+=subtotal + taxa ;
-//   Valortotal.textContent = `Total:${total.toLocaleString("pt-BR",{
-//     style:"currency",
-//     currency: "BRL"
-//   })}`;
-
-
-// }
+// fim botao presentear para o checkout
 
