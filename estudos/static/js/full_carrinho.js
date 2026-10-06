@@ -1,6 +1,7 @@
 const PresentesGeral= document.getElementById("listadepresentes1");
 const abrircarrinho = document.getElementById("meucarrinho");
 const dentrodomeucarrinho = document.getElementById("dentrodocarrinho");
+const FooterMeusPresentes = document.getElementById("footerCarrinho");
 
 let listPresentes=[];
 
@@ -71,16 +72,18 @@ let total = 0;
         produto.classList.add("itemcarrinho");
 
         produto.innerHTML = `
-            <div>
+            <div id="itensdentrocarrinho">
                 <p>${item.name}</p>
                 <p>R$ ${item.price.toFixed(2)}</p>
                 <p>Quantidade: ${item.quantity}</p>
-                <p>Subtotal: R$ ${subtotal.toFixed(2)}</p>
-
+                 <button
+                    class="adicinaritem"
+                    data-name="${item.name}">
+                    Adicionar
+                </button>
                 <button
                     class="removeritem"
-                    data-name="${item.name}"
-                >
+                    data-name="${item.name}">
                     Remover
                 </button>
             </div>
@@ -89,15 +92,37 @@ let total = 0;
         submeucarrinho.appendChild(produto);
     });
 
-    const totalCarrinho = document.createElement("p");
+    const totalCarrinho = document.getElementById("valortotal");
+    totalCarrinho.textContent = `Total: R$ ${total.toFixed(2)}`;
 
-    totalCarrinho.innerHTML = `
-        <strong>Total: R$ ${total.toFixed(2)}</strong>
-    `;
+    // inicio quantidade de itens no carrinho meus presentes
+    const QuantidadeTotal = document.getElementById("quantidadecarinho");
+    QuantidadeTotal.textContent = listPresentes.reduce((total, item) => total + item.quantity, 0);
+    if (listPresentes.length === 1) {
+      FooterMeusPresentes.style.display = "block";
+    } else if (listPresentes.length === 0) {
+      FooterMeusPresentes.style.display = "none";
+    }
+// fim quantidade de itens no carrinho meus presentes
 
-    submeucarrinho.appendChild(totalCarrinho);
 }
 // fim add produtos em meu carrinho
+
+
+
+
+// inicio adicionar item do carrinho
+submeucarrinho.addEventListener("click", (event)=>{
+  if(event.target.classList.contains("adicinaritem")){
+    const name = event.target.getAttribute("data-name");
+    const item = listPresentes.find(item => item.name === name);
+    if (item) {
+      item.quantity += 1;
+      mostrarCarrinho();
+    }
+  }
+})
+// fim adicionar item do carrinho
 
 
 // // inicio remover item do carrinho
@@ -105,6 +130,8 @@ submeucarrinho.addEventListener("click", (event) => {
   if (event.target.classList.contains("removeritem")) {
     const name = event.target.getAttribute("data-name");
     removeritens(name);
+    mostrarCarrinho();
+
   }
 });
 // // fim remover item do carrinho

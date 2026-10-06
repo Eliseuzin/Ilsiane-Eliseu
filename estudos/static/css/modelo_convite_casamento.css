@@ -519,7 +519,7 @@ main > div {
   bottom: 0px;
   left: 0%;
   z-index: 999;
-  /* display: none; */
+  display: none;
 }
 
 #meucarrinho{
@@ -570,6 +570,53 @@ main > div {
   font-style: bold;
   /* display: none; */
 }
+
+/* inicio tela de rolagem dentro do carrinho */
+
+#step-carrinho {
+    display: flex;
+    flex-direction: column;
+    max-height: 70vh;
+}
+
+#submeucarrinho {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+    padding-right: 5px;
+}
+
+#resumo {
+    flex-shrink: 0;
+}
+
+#fim-step-resumo {
+    flex-shrink: 0;
+}
+
+#submeucarrinho::-webkit-scrollbar {
+    width: 7px;
+}
+
+#submeucarrinho::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+#submeucarrinho::-webkit-scrollbar-thumb {
+    background: rgba(100, 120, 80, 0.8);
+    border-radius: 10px;
+}
+
+#submeucarrinho::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 120, 80, 1);
+}
+/* fim tela de rolagem dentro do carrinho */
+
+
+
+
 #rodape-carrinho{
   border-top: 1px solid #555;
   padding-top: 10px;
@@ -607,6 +654,28 @@ main > div {
 
 /* fim voltar/presentear carrinho */
 
+
+
+/* inicio adicionar mais itens no carrinho */
+.adicinaritem{
+    border-radius: 5px;
+    padding: 5px;
+    font-family: "Courier New", "Courier", monospace;
+    background-color: rgba(24, 104, 24, 0.616);
+    color: #ffffff99;
+}
+/* fim adicionar mais itens no carrinho */
+
+
+/* inicio remover itens do carrinho */
+.removeritem{
+    border-radius: 5px;
+    padding: 5px;
+    font-family: "Courier New", "Courier", monospace;
+    background-color: rgba(192, 12, 12, 0.548);
+    color: #ffffff99;
+}
+/* fim remover itens no carrinho */
 
 
 /* inicio confirmaçao de presença */
