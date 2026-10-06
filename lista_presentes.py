@@ -3,7 +3,7 @@ presentes=[
         "id":1,
         "nome":"Liquidificador Turbo Power Mondial 550W",
         "descricao":"",
-        "preco": 180.99,
+        "preco": 1.99,
         "imagem": "liquidificador_mondial.webp"
     },
 
