@@ -8,8 +8,8 @@ routes = Blueprint("routes", __name__)
 
 @routes.route("/")
 def inicio():
-    print("========== ENTROU NA ROTA INICIO ==========")
-    print("PRESENTES:", presentes)
+    # print("========== ENTROU NA ROTA INICIO ==========")
+    # print("PRESENTES:", presentes)
 
     return render_template(
         "index.html",
@@ -101,7 +101,17 @@ def criar_pagamento():
         })
 
     preference_data = {
-        "items": itens_mp
+        "items": itens_mp,
+
+        "back_urls": {
+            "success": "https://convite-para-nosso-casamento.onrender.com/pagamento/sucesso",
+            "pending": "https://convite-para-nosso-casamento.onrender.com/pagamento/pendente",
+            "failure": "https://convite-para-nosso-casamento.onrender.com/pagamento/falha"
+        },
+
+        "auto_return": "approved",
+
+        "notification_url": "https://convite-para-nosso-casamento.onrender.com/webhook/mercadopago"
     }
 
     preference_response = sdk.preference().create(preference_data)
@@ -114,6 +124,32 @@ def criar_pagamento():
     }
 
 
-
-
 # fim integração com o Mercado Pago
+
+# inicio rotas de sucesso, falha e pendente do pagamento
+
+@routes.route("/pagamento/sucesso")
+def pagamento_sucesso():
+    return render_template("pagamento/sucesso.html")
+
+
+@routes.route("/pagamento/pendente")
+def pagamento_pendente():
+    return render_template("pagamento/pendente.html")
+
+
+@routes.route("/pagamento/falha")
+def pagamento_falha():
+    return render_template("pagamento/falha.html")
+
+# fim rotas de sucesso, falha e pendente do pagamento
+
+
+@routes.route("/webhook/mercadopago", methods=["POST"])
+def webhook_mercadopago():
+    dados = request.get_json()
+
+    print("========== WEBHOOK MERCADO PAGO ==========")
+    print(dados)
+
+    return "", 200
