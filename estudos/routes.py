@@ -60,70 +60,151 @@ sdk = mercadopago.SDK(API_MERCADO_PAGO_ACCESS_TOKEN)
 
 from flask import Blueprint, render_template, request
 
+from estudos.models import Compra, ItemCompra, db
+from decimal import Decimal
+
+
 @routes.route("/criar_pagamento", methods=["POST"])
 def criar_pagamento():
-
-    dados = request.get_json()
-
+    dados = request.get_json(silent=True) or {}
     itens_carrinho = dados.get("presentes", [])
 
-    if not itens_carrinho:
-        return {
-            "erro": "Carrinho vazio"
-        }, 400
+    if not isinstance(itens_carrinho, list) or not itens_carrinho:
+        return {"erro": "Carrinho vazio ou inválido."}, 400
 
     itens_mp = []
+    itens_banco = []
+    valor_total = Decimal("0.00")
 
-    for item in itens_carrinho:
+    try:
+        for item in itens_carrinho:
+            id_presente = int(item["id"])
+            quantidade = int(item["quantity"])
 
-        id_presente = int(item["id"])
-        quantidade = int(item["quantity"])
+            if quantidade <= 0:
+                return {"erro": "A quantidade deve ser maior que zero."}, 400
 
-        # Procura o presente verdadeiro na lista_presente.py
-        presente = next(
-            (
-                presente
-                for presente in presentes
-                if presente["id"] == id_presente
-            ),
-            None
+            # Busca o presente na lista oficial do projeto.
+            presente = next(
+                (
+                    p for p in presentes
+                    if p["id"] == id_presente
+                ),
+                None
+            )
+
+            if presente is None:
+                return {
+                    "erro": f"Presente com ID {id_presente} não encontrado."
+                }, 400
+
+            # O preço vem do servidor, não do navegador.
+            preco = Decimal(str(presente["preco"]))
+            subtotal = preco * quantidade
+            valor_total += subtotal
+
+            itens_mp.append({
+                "title": presente["nome"].strip(),
+                "quantity": quantidade,
+                "unit_price": float(preco),
+                "currency_id": "BRL"
+            })
+
+            itens_banco.append({
+                "presente_id": id_presente,
+                "nome_presente": presente["nome"].strip(),
+                "quantidade": quantidade,
+                "valor_unitario": preco,
+                "subtotal": subtotal
+            })
+
+    except (KeyError, TypeError, ValueError, ArithmeticError):
+        return {"erro": "Os dados dos presentes são inválidos."}, 400
+
+    try:
+        # Cria a compra no banco.
+        compra = Compra(
+            valor_total=valor_total,
+            status="pendente"
         )
 
-        if presente is None:
+        db.session.add(compra)
+        db.session.flush()
+
+        # Associa cada presente à compra criada.
+        for item_banco in itens_banco:
+            item_banco["compra_id"] = compra.id
+            db.session.add(ItemCompra(**item_banco))
+
+        preference_data = {
+            "items": itens_mp,
+
+            # Permite localizar esta compra no webhook.
+            "external_reference": compra.referencia,
+
+            "back_urls": {
+                "success": (
+                    "https://convite-para-nosso-casamento.onrender.com/"
+                    "pagamento/sucesso"
+                ),
+                "pending": (
+                    "https://convite-para-nosso-casamento.onrender.com/"
+                    "pagamento/pendente"
+                ),
+                "failure": (
+                    "https://convite-para-nosso-casamento.onrender.com/"
+                    "pagamento/falha"
+                )
+            },
+
+            "auto_return": "approved",
+
+            "notification_url": (
+                "https://convite-para-nosso-casamento.onrender.com/"
+                "webhook/mercadopago"
+            )
+        }
+
+        # Solicita a criação do checkout ao Mercado Pago.
+        resposta_mp = sdk.preference().create(preference_data)
+
+        if resposta_mp.get("status") not in (200, 201):
+            db.session.rollback()
+            logger.error(
+                "Falha ao criar preferência: HTTP %s",
+                resposta_mp.get("status")
+            )
             return {
-                "erro": f"Presente com ID {id_presente} não encontrado."
-            }, 400
+                "erro": "Não foi possível iniciar o pagamento."
+            }, 502
 
-        itens_mp.append({
-            "title": presente["nome"].strip(),
-            "quantity": quantidade,
-            "unit_price": float(presente["preco"]),
-            "currency_id": "BRL"
-        })
+        preference = resposta_mp.get("response", {})
+        preference_id = preference.get("id")
+        link_pagamento = preference.get("init_point")
 
-    preference_data = {
-        "items": itens_mp,
+        if not preference_id or not link_pagamento:
+            db.session.rollback()
+            logger.error("Resposta incompleta ao criar preferência.")
+            return {
+                "erro": "O Mercado Pago não retornou o link de pagamento."
+            }, 502
 
-        "back_urls": {
-            "success": "https://convite-para-nosso-casamento.onrender.com/pagamento/sucesso",
-            "pending": "https://convite-para-nosso-casamento.onrender.com/pagamento/pendente",
-            "failure": "https://convite-para-nosso-casamento.onrender.com/pagamento/falha"
-        },
+        # Guarda a preferência e confirma a compra no banco.
+        compra.preference_id = str(preference_id)
+        db.session.commit()
 
-        "auto_return": "approved",
+        return {
+            "id": preference_id,
+            "link": link_pagamento
+        }
 
-        "notification_url": "https://convite-para-nosso-casamento.onrender.com/webhook/mercadopago"
-    }
+    except Exception:
+        db.session.rollback()
+        logger.exception("Erro ao registrar compra ou criar pagamento.")
 
-    preference_response = sdk.preference().create(preference_data)
-
-    preference = preference_response["response"]
-
-    return {
-        "id": preference["id"],
-        "link": preference["init_point"]
-    }
-
+        return {
+            "erro": "Ocorreu um erro ao iniciar o pagamento."
+        }, 500
 
 # fim integração com o Mercado Pago
 
