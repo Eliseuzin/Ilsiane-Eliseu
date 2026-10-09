@@ -233,6 +233,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 # inicio webhook do Mercado Pago para receber notificações de pagamento
+
 @routes.route("/webhook/mercadopago", methods=["POST"])
 def webhook_mercadopago():
     dados = request.get_json(silent=True) or {}
@@ -243,7 +244,6 @@ def webhook_mercadopago():
         or request.args.get("topic")
     )
 
-    # Identifica o ID do pagamento
     payment_id = (
         dados.get("data", {}).get("id")
         or request.args.get("data.id")
@@ -254,50 +254,31 @@ def webhook_mercadopago():
         )
     )
 
-    print(
-    f"[MP WEBHOOK] Recebido: tipo={tipo}, payment_id={payment_id}",
-    flush=True
-)
-
     logger.info(
         "Webhook recebido: tipo=%s, payment_id=%s",
         tipo,
         payment_id
     )
 
-    # merchant_order não é um ID de pagamento.
-    # O pagamento será tratado pela notificação payment.
+    # Ignora notificações que não sejam de pagamento.
     if tipo != "payment":
-        logger.info(
-            "Notificação ignorada: tipo=%s",
-            tipo
-        )
         return jsonify({
             "status": "notificacao_ignorada"
         }), 200
 
     if not payment_id:
-        logger.warning(
-            "Notificação de pagamento sem ID."
-        )
         return jsonify({
             "erro": "ID do pagamento ausente"
         }), 400
 
     try:
-        print("[MP WEBHOOK] Consultando pagamento na API...", flush=True)
+        # Consulta o pagamento diretamente ao Mercado Pago.
         resposta = sdk.payment().get(str(payment_id))
-        print(
-        f"[MP WEBHOOK] Resposta HTTP da API: {resposta.get('status')}",
-        flush=True
-    )
-        
 
         if resposta.get("status") != 200:
             logger.error(
-                "Falha ao consultar pagamento %s: HTTP %s",
-                payment_id,
-                resposta.get("status")
+                "Falha ao consultar pagamento %s",
+                payment_id
             )
             return jsonify({
                 "erro": "Falha ao consultar pagamento"
@@ -305,40 +286,166 @@ def webhook_mercadopago():
 
         pagamento = resposta.get("response", {})
         status_pagamento = pagamento.get("status")
-        print(
-        f"[MP WEBHOOK] Status confirmado pela API: {status_pagamento}",
-        flush=True
-)
 
         logger.info(
-            "Pagamento %s consultado: status=%s",
+            "Pagamento %s: status=%s",
             payment_id,
             status_pagamento
         )
 
-        if status_pagamento == "approved":
-            logger.info(
-                "PAGAMENTO APROVADO E VALIDADO: %s",
+        # Identifica a compra criada antes do checkout.
+        referencia = pagamento.get("external_reference")
+
+        if not referencia:
+            logger.error(
+                "Pagamento %s sem external_reference",
                 payment_id
             )
-        else:
-            logger.info(
-                "Pagamento ainda não aprovado: %s",
+            return jsonify({
+                "status": "referencia_ausente"
+            }), 200
+
+        compra = Compra.query.filter_by(
+            referencia=referencia
+        ).first()
+
+        if compra is None:
+            logger.error(
+                "Compra não encontrada para a referência %s",
+                referencia
+            )
+            return jsonify({
+                "status": "compra_nao_encontrada"
+            }), 200
+
+        # Impede que o mesmo pagamento seja associado
+        # a duas compras diferentes.
+        outra_compra = Compra.query.filter_by(
+            mercado_pago_id=str(payment_id)
+        ).first()
+
+        if outra_compra and outra_compra.id != compra.id:
+            logger.error(
+                "Pagamento %s associado a outra compra",
                 payment_id
             )
+            return jsonify({
+                "status": "pagamento_ja_associado"
+            }), 200
+
+        # Não permite substituir o ID de pagamento
+        # de uma compra por outro ID.
+        if (
+            compra.mercado_pago_id
+            and compra.mercado_pago_id != str(payment_id)
+        ):
+            logger.error(
+                "Compra %s já possui outro pagamento associado",
+                compra.id
+            )
+            return jsonify({
+                "status": "pagamento_divergente"
+            }), 200
+
+        # Se a compra já foi aprovada, não a reprocessa.
+        if compra.status == "approved":
+            if compra.mercado_pago_id == str(payment_id):
+                return jsonify({
+                    "status": "ja_processado",
+                    "compra_id": compra.id
+                }), 200
+
+        # Registra outros estados, sem substituir uma
+        # aprovação já confirmada por um estado inferior.
+        if status_pagamento != "approved":
+            if compra.status != "approved":
+                compra.status = status_pagamento or "desconhecido"
+                db.session.commit()
+
+            return jsonify({
+                "status": status_pagamento or "desconhecido",
+                "compra_id": compra.id
+            }), 200
+
+        # Confere o valor e a moeda antes de aprovar a compra.
+        try:
+            valor_pago = Decimal(
+                str(pagamento.get("transaction_amount"))
+            ).quantize(Decimal("0.01"))
+
+            valor_compra = Decimal(
+                str(compra.valor_total)
+            ).quantize(Decimal("0.01"))
+        except Exception:
+            logger.exception(
+                "Valor inválido no pagamento %s",
+                payment_id
+            )
+            return jsonify({
+                "status": "valor_invalido"
+            }), 200
+
+        moeda = pagamento.get("currency_id")
+
+        if moeda != "BRL" or valor_pago != valor_compra:
+            logger.error(
+                "Divergência no pagamento %s: "
+                "valor_pago=%s, valor_compra=%s, moeda=%s",
+                payment_id,
+                valor_pago,
+                valor_compra,
+                moeda
+            )
+            return jsonify({
+                "status": "revisao_necessaria"
+            }), 200
+
+        # Salva a aprovação confirmada pela API.
+        compra.status = "approved"
+        compra.mercado_pago_id = str(payment_id)
+
+        # Guarda os dados do pagador para a futura
+        # implementação dos e-mails.
+        pagador = pagamento.get("payer") or {}
+
+        nome = " ".join(
+            parte for parte in [
+                pagador.get("first_name"),
+                pagador.get("last_name")
+            ]
+            if parte
+        ).strip()
+
+        if nome:
+            compra.nome_convidado = nome
+
+        if pagador.get("email"):
+            compra.email_convidado = pagador["email"]
+
+        db.session.commit()
+
+        logger.info(
+            "Compra %s aprovada e salva. Pagamento: %s",
+            compra.id,
+            payment_id
+        )
 
         return jsonify({
-            "status": status_pagamento or "desconhecido",
+            "status": "approved",
+            "compra_id": compra.id,
             "payment_id": str(payment_id)
         }), 200
 
     except Exception:
+        db.session.rollback()
+
         logger.exception(
-            "Erro ao consultar pagamento %s",
+            "Erro ao processar webhook do pagamento %s",
             payment_id
         )
+
         return jsonify({
-            "erro": "Erro ao consultar o pagamento"
+            "erro": "Erro ao processar o pagamento"
         }), 500
 
 # fim webhook do Mercado Pago para receber notificações de pagamento
