@@ -97,7 +97,8 @@ def criar_pagamento():
         itens_mp.append({
             "title": presente["nome"].strip(),
             "quantity": quantidade,
-            "unit_price": presente["preco"]
+            "unit_price": float(presente["preco"]),
+            "currency_id": "BRL"
         })
 
     preference_data = {
