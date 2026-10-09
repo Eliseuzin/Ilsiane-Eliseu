@@ -173,6 +173,11 @@ def webhook_mercadopago():
         )
     )
 
+    print(
+    f"[MP WEBHOOK] Recebido: tipo={tipo}, payment_id={payment_id}",
+    flush=True
+)
+
     logger.info(
         "Webhook recebido: tipo=%s, payment_id=%s",
         tipo,
@@ -199,7 +204,13 @@ def webhook_mercadopago():
         }), 400
 
     try:
+        print("[MP WEBHOOK] Consultando pagamento na API...", flush=True)
         resposta = sdk.payment().get(str(payment_id))
+        print(
+        f"[MP WEBHOOK] Resposta HTTP da API: {resposta.get('status')}",
+        flush=True
+    )
+        
 
         if resposta.get("status") != 200:
             logger.error(
@@ -213,6 +224,10 @@ def webhook_mercadopago():
 
         pagamento = resposta.get("response", {})
         status_pagamento = pagamento.get("status")
+        print(
+        f"[MP WEBHOOK] Status confirmado pela API: {status_pagamento}",
+        flush=True
+)
 
         logger.info(
             "Pagamento %s consultado: status=%s",
