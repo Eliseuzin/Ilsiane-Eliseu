@@ -154,17 +154,24 @@ logger = logging.getLogger(__name__)
 # inicio webhook do Mercado Pago para receber notificações de pagamento
 @routes.route("/webhook/mercadopago", methods=["POST"])
 def webhook_mercadopago():
-    # Recebe a notificação do Mercado Pago
     dados = request.get_json(silent=True) or {}
 
-    # O Mercado Pago envia o ID do pagamento na notificação
+    tipo = (
+        dados.get("type")
+        or request.args.get("type")
+        or request.args.get("topic")
+    )
+
+    # Identifica o ID do pagamento
     payment_id = (
         dados.get("data", {}).get("id")
         or request.args.get("data.id")
-        or request.args.get("id")
+        or (
+            request.args.get("id")
+            if tipo == "payment"
+            else None
+        )
     )
-
-    tipo = dados.get("type") or request.args.get("type")
 
     logger.info(
         "Webhook recebido: tipo=%s, payment_id=%s",
@@ -172,22 +179,32 @@ def webhook_mercadopago():
         payment_id
     )
 
-    # Processamos somente notificações de pagamento
-    if tipo and tipo != "payment":
-        return jsonify({"status": "notificacao_ignorada"}), 200
+    # merchant_order não é um ID de pagamento.
+    # O pagamento será tratado pela notificação payment.
+    if tipo != "payment":
+        logger.info(
+            "Notificação ignorada: tipo=%s",
+            tipo
+        )
+        return jsonify({
+            "status": "notificacao_ignorada"
+        }), 200
 
     if not payment_id:
-        logger.warning("Webhook recebido sem ID de pagamento.")
-        return jsonify({"erro": "ID do pagamento ausente"}), 400
+        logger.warning(
+            "Notificação de pagamento sem ID."
+        )
+        return jsonify({
+            "erro": "ID do pagamento ausente"
+        }), 400
 
     try:
-        # Consulta o pagamento diretamente na API do Mercado Pago
-        resposta = sdk.payment().get(payment_id)
+        resposta = sdk.payment().get(str(payment_id))
 
-        # Confere o resultado da consulta
         if resposta.get("status") != 200:
             logger.error(
-                "Falha ao consultar pagamento: HTTP %s",
+                "Falha ao consultar pagamento %s: HTTP %s",
+                payment_id,
                 resposta.get("status")
             )
             return jsonify({
@@ -198,7 +215,7 @@ def webhook_mercadopago():
         status_pagamento = pagamento.get("status")
 
         logger.info(
-            "Pagamento %s: status=%s",
+            "Pagamento %s consultado: status=%s",
             payment_id,
             status_pagamento
         )
@@ -208,27 +225,20 @@ def webhook_mercadopago():
                 "PAGAMENTO APROVADO E VALIDADO: %s",
                 payment_id
             )
-
-            return jsonify({
-                "status": "approved",
-                "payment_id": str(payment_id),
-                "mensagem": "Pagamento aprovado e validado."
-            }), 200
-
-        logger.info(
-            "Pagamento ainda não aprovado: %s",
-            status_pagamento
-        )
+        else:
+            logger.info(
+                "Pagamento ainda não aprovado: %s",
+                payment_id
+            )
 
         return jsonify({
             "status": status_pagamento or "desconhecido",
-            "payment_id": str(payment_id),
-            "mensagem": "Pagamento consultado, mas não aprovado."
+            "payment_id": str(payment_id)
         }), 200
 
     except Exception:
         logger.exception(
-            "Erro ao consultar pagamento %s na API.",
+            "Erro ao consultar pagamento %s",
             payment_id
         )
         return jsonify({
