@@ -32,7 +32,7 @@ from mercadopay import API_MERCADO_PAGO_ACCESS_TOKEN
 
 import mercadopago
 
-from mercadopay import API_MERCADO_PAGO_ACCESS_TOKEN
+# from mercadopay import API_MERCADO_PAGO_ACCESS_TOKEN
 sdk = mercadopago.SDK(API_MERCADO_PAGO_ACCESS_TOKEN)
 
 

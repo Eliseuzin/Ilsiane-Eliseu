@@ -3,7 +3,7 @@ presentes=[
         "id":1,
         "nome":"Liquidificador Turbo Power Mondial 550W",
         "descricao":"",
-        "preco": 1.99,
+        "preco": 0.99,
         "imagem": "liquidificador_mondial.webp"
     },
 
@@ -11,7 +11,7 @@ presentes=[
         "id":2,
         "nome":"Multiprocessador Turbo Chef 3 Em 1 Mondial 1000W",
         "descricao":"",
-        "preco": 300.99,
+        "preco": 0.99,
         "imagem": "Multiprocessador_Turbo_Chef.webp"
     },
 
