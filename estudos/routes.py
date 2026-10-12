@@ -200,6 +200,10 @@ def criar_pagamento():
             compra.preference_id,
             db.engine.url.database
         )
+        return {
+            "id":"preference_id",
+            "link": link_pagamento
+        }
 
     except Exception:
         db.session.rollback()
