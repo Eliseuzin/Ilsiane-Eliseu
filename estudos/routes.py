@@ -305,9 +305,47 @@ def webhook_mercadopago():
                 "status": "referencia_ausente"
             }), 200
 
+        logger.info(
+            "Buscando compra pela referência: %r",
+            referencia
+        )
+
         compra = Compra.query.filter_by(
             referencia=referencia
         ).first()
+
+        # Verifica se a consulta encontrou a compra.
+        logger.info(
+            "Resultado da busca: %s",
+            "encontrada" if compra is not None else "não encontrada"
+        )
+
+        # Se não encontrou, encerra o processamento com segurança.
+        if compra is None:
+            logger.error(
+                "Compra não encontrada para a referência %s",
+                referencia
+            )
+
+            return jsonify({
+                "status": "compra_nao_encontrada",
+                "referencia": referencia
+            }), 200
+
+
+
+        if compra is None:
+            logger.error(
+                "Compra não encontrada. "
+                "payment_id=%s, referencia=%s",
+                payment_id,
+                referencia
+            )
+
+            return jsonify({
+                "status": "compra_nao_encontrada",
+                "referencia": referencia
+            }), 200
 
 
         logger.info(
@@ -330,15 +368,6 @@ def webhook_mercadopago():
             pagamento.get("currency_id")
         )
 
-
-        if compra is None:
-            logger.error(
-                "Compra não encontrada para a referência %s",
-                referencia
-            )
-            return jsonify({
-                "status": "compra_nao_encontrada"
-            }), 200
 
         # Impede que o mesmo pagamento seja associado
         # a duas compras diferentes.
