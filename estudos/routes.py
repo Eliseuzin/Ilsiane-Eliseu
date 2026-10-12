@@ -309,6 +309,28 @@ def webhook_mercadopago():
             referencia=referencia
         ).first()
 
+
+        logger.info(
+            "Compra localizada: id=%s, referencia=%s, "
+            "status_atual=%s, valor_total=%s, mercado_pago_id=%s",
+            compra.id,
+            compra.referencia,
+            compra.status,
+            compra.valor_total,
+            compra.mercado_pago_id
+        )
+
+        logger.info(
+            "Pagamento recebido: id=%s, status=%s, "
+            "external_reference=%s, valor=%s, moeda=%s",
+            payment_id,
+            status_pagamento,
+            referencia,
+            pagamento.get("transaction_amount"),
+            pagamento.get("currency_id")
+        )
+
+
         if compra is None:
             logger.error(
                 "Compra não encontrada para a referência %s",
@@ -396,6 +418,18 @@ def webhook_mercadopago():
                 valor_compra,
                 moeda
             )
+
+            logger.info(
+                "VALIDACAO COMPRA: id=%s, status=%s, "
+                "payment_id=%s, valor_pago=%s, "
+                "valor_compra=%s, moeda=%s",
+                compra.id,
+                compra.status,
+                payment_id,
+                valor_pago,
+                valor_compra,
+                moeda
+            )
             return jsonify({
                 "status": "revisao_necessaria"
             }), 200
@@ -424,10 +458,14 @@ def webhook_mercadopago():
 
         db.session.commit()
 
+        db.session.refresh(compra)
+
         logger.info(
-            "Compra %s aprovada e salva. Pagamento: %s",
+            "COMPRA ATUALIZADA: id=%s, status=%s, "
+            "mercado_pago_id=%s",
             compra.id,
-            payment_id
+            compra.status,
+            compra.mercado_pago_id
         )
 
         return jsonify({
