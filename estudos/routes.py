@@ -192,28 +192,14 @@ def criar_pagamento():
         # Guarda a preferência e confirma a compra no banco.
         compra.preference_id = str(preference_id)
         db.session.commit()
-        
-        logger.info(
-            "COMPRA SALVA: id=%s, referencia=%s, banco=%s",
-            compra.id,
-            compra.referencia,
-            db.engine.url.database
-        )
-
 
         logger.info(
-            "COMPRA SALVA: id=%s, referencia=%s, "
-            "preference_id=%s, valor_total=%s",
+            "COMPRA Criada: id=%s, referencia=%s, preference_id=%s, banco=%s",
             compra.id,
             compra.referencia,
             compra.preference_id,
-            compra.valor_total
+            db.engine.url.database
         )
-
-        return {
-            "id": preference_id,
-            "link": link_pagamento
-        }
 
     except Exception:
         db.session.rollback()
@@ -304,14 +290,15 @@ def webhook_mercadopago():
         pagamento = resposta.get("response", {})
         status_pagamento = pagamento.get("status")
 
-        logger.info(
-            "Pagamento %s: status=%s",
-            payment_id,
-            status_pagamento
-        )
-
         # Identifica a compra criada antes do checkout.
         referencia = pagamento.get("external_reference")
+
+        logger.info(
+                "Pagamento consultado: id=%s, status=%s, referencia=%s",
+                payment_id,
+                status_pagamento,
+                referencia
+            )
 
         if not referencia:
             logger.error(
@@ -335,59 +322,18 @@ def webhook_mercadopago():
             referencia=referencia
         ).first()
 
-        # Verifica se a consulta encontrou a compra.
-        logger.info(
-            "Resultado da busca: %s",
-            "encontrada" if compra is not None else "não encontrada"
-        )
-
         # Se não encontrou, encerra o processamento com segurança.
         if compra is None:
             logger.error(
-                "Compra não encontrada para a referência %s",
-                referencia
-            )
+                "Compra não encontrada: referência=%s, banco=%s",
+                referencia,
+                db.engine.url.database
+                )
 
             return jsonify({
                 "status": "compra_nao_encontrada",
                 "referencia": referencia
             }), 200
-
-
-
-        if compra is None:
-            logger.error(
-                "Compra não encontrada. "
-                "payment_id=%s, referencia=%s",
-                payment_id,
-                referencia
-            )
-
-            return jsonify({
-                "status": "compra_nao_encontrada",
-                "referencia": referencia
-            }), 200
-
-
-        logger.info(
-            "Compra localizada: id=%s, referencia=%s, "
-            "status_atual=%s, valor_total=%s, mercado_pago_id=%s",
-            compra.id,
-            compra.referencia,
-            compra.status,
-            compra.valor_total,
-            compra.mercado_pago_id
-        )
-
-        logger.info(
-            "Pagamento recebido: id=%s, status=%s, "
-            "external_reference=%s, valor=%s, moeda=%s",
-            payment_id,
-            status_pagamento,
-            referencia,
-            pagamento.get("transaction_amount"),
-            pagamento.get("currency_id")
-        )
 
 
         # Impede que o mesmo pagamento seja associado
@@ -507,8 +453,6 @@ def webhook_mercadopago():
             compra.email_convidado = pagador["email"]
 
         db.session.commit()
-
-        db.session.refresh(compra)
 
         logger.info(
             "COMPRA ATUALIZADA: id=%s, status=%s, "
