@@ -193,6 +193,15 @@ def criar_pagamento():
         compra.preference_id = str(preference_id)
         db.session.commit()
 
+        logger.info(
+            "COMPRA SALVA: id=%s, referencia=%s, "
+            "preference_id=%s, valor_total=%s",
+            compra.id,
+            compra.referencia,
+            compra.preference_id,
+            compra.valor_total
+        )
+
         return {
             "id": preference_id,
             "link": link_pagamento
