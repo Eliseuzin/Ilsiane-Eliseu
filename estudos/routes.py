@@ -192,6 +192,14 @@ def criar_pagamento():
         # Guarda a preferência e confirma a compra no banco.
         compra.preference_id = str(preference_id)
         db.session.commit()
+        
+        logger.info(
+            "COMPRA SALVA: id=%s, referencia=%s, banco=%s",
+            compra.id,
+            compra.referencia,
+            db.engine.url.database
+        )
+
 
         logger.info(
             "COMPRA SALVA: id=%s, referencia=%s, "
@@ -317,6 +325,10 @@ def webhook_mercadopago():
         logger.info(
             "Buscando compra pela referência: %r",
             referencia
+        )
+        logger.info(
+            "WEBHOOK CONSULTANDO BANCO: %s",
+            db.engine.url.database
         )
 
         compra = Compra.query.filter_by(
