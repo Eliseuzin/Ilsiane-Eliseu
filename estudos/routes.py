@@ -342,6 +342,14 @@ def webhook_mercadopago():
         assinatura_calculada,
         assinatura_recebida
     ):
+        logger.info(
+        "Webhook assinatura: data_id=%s, request_id_presente=%s, "
+        "timestamp_presente=%s, assinatura_presente=%s",
+        data_id,
+        bool(request_id),
+        bool(timestamp),
+        bool(assinatura_recebida)
+    )
         logger.warning("Assinatura inválida no webhook.")
         return jsonify({
             "erro": "Assinatura inválida"
