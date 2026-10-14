@@ -383,21 +383,39 @@ def webhook_mercadopago():
             "erro": "ID do pagamento ausente"
         }), 400
 
+
     try:
-        # Consulta o pagamento diretamente ao Mercado Pago.
+        # inicio Consulta o pagamento diretamente ao Mercado Pago.
         resposta = sdk.payment().get(str(payment_id))
 
-        if resposta.get("status") != 200:
-            logger.error(
-                "Falha ao consultar pagamento %s",
-                payment_id
+        status_http = resposta.get("status")
+
+        if status_http != 200:
+            logger.warning(
+                "Consulta Mercado Pago não concluída: "
+                "payment_id=%s, status_http=%s",
+                payment_id,
+                status_http
             )
+
+            # O ID 123456 da simulação pode não corresponder
+            # a um pagamento real consultável.
+            # Não altera o status da compra nesse caso.
+            if str(payment_id) == "123456":
+                return jsonify({
+                    "status": "pagamento_de_teste_nao_encontrado"
+                }), 200
+
+            # Mantém a possibilidade de nova tentativa para
+            # outros IDs, caso a API esteja temporariamente indisponível.
             return jsonify({
                 "erro": "Falha ao consultar pagamento"
             }), 502
 
         pagamento = resposta.get("response", {})
         status_pagamento = pagamento.get("status")
+        # fim Consulta o pagamento diretamente ao Mercado Pago.
+
 
         # Identifica a compra criada antes do checkout.
         referencia = pagamento.get("external_reference")
