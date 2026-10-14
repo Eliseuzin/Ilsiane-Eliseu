@@ -338,6 +338,19 @@ def webhook_mercadopago():
         hashlib.sha256
     ).hexdigest()
 
+    
+    logger.info(
+        "Diagnóstico webhook: data_id=%s, "
+        "request_id_presente=%s, "
+        "timestamp_presente=%s, "
+        "assinatura_presente=%s",
+        data_id,
+        bool(request_id),
+        bool(timestamp),
+        bool(assinatura_recebida)
+    )
+
+
     if not hmac.compare_digest(
         assinatura_calculada,
         assinatura_recebida
