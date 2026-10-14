@@ -1,6 +1,11 @@
 from flask import Blueprint, render_template
 from lista_presentes import presentes
 from estudos.models import Pagamento, db
+# inicio de validaçao da notificaçao do webhook do Mercado Pago
+import os
+import hmac
+import hashlib
+# fim de validaçao da notificaçao do webhook do Mercado Pago
 
 
 routes = Blueprint("routes", __name__)
@@ -98,10 +103,23 @@ def criar_pagamento():
                     "erro": f"Presente com ID {id_presente} não encontrado."
                 }, 400
 
-            # O preço vem do servidor, não do navegador.
-            preco = Decimal(str(presente["preco"]))
-            subtotal = preco * quantidade
+            # inicio do preço que vem do servidor, não do navegador.
+            preco = Decimal(str(presente["preco"])).quantize(
+                Decimal("0.01")
+            )
+
+            if not preco.is_finite() or preco <= 0:
+                return {
+                    "erro": "O preço do presente é inválido."
+                }, 400
+
+            subtotal = (preco * quantidade).quantize(
+                Decimal("0.01")
+            )
+
             valor_total += subtotal
+
+            # fim do preço que vem do servidor, não do navegador.
 
             itens_mp.append({
                 "title": presente["nome"].strip(),
@@ -136,6 +154,11 @@ def criar_pagamento():
             item_banco["compra_id"] = compra.id
             db.session.add(ItemCompra(**item_banco))
 
+
+        # inicio urls de retorno e webhook para o Mercado Pago
+        BASE_URL = "https://convite-para-nosso-casamento.onrender.com"
+
+
         preference_data = {
             "items": itens_mp,
 
@@ -143,27 +166,19 @@ def criar_pagamento():
             "external_reference": compra.referencia,
 
             "back_urls": {
-                "success": (
-                    "https://convite-para-nosso-casamento.onrender.com/"
-                    "pagamento/sucesso"
-                ),
-                "pending": (
-                    "https://convite-para-nosso-casamento.onrender.com/"
-                    "pagamento/pendente"
-                ),
-                "failure": (
-                    "https://convite-para-nosso-casamento.onrender.com/"
-                    "pagamento/falha"
-                )
+                "success": f"{BASE_URL}/pagamento/sucesso",
+                "pending": f"{BASE_URL}/pagamento/pendente",
+                "failure": f"{BASE_URL}/pagamento/falha",
             },
 
             "auto_return": "approved",
 
             "notification_url": (
-                "https://convite-para-nosso-casamento.onrender.com/"
-                "webhook/mercadopago"
+                f"{BASE_URL}/webhook/mercadopago"
             )
         }
+        # fim urls de retorno e webhook para o Mercado Pago
+
 
         # Solicita a criação do checkout ao Mercado Pago.
         resposta_mp = sdk.preference().create(preference_data)
@@ -200,10 +215,11 @@ def criar_pagamento():
             compra.preference_id,
             db.engine.url.database
         )
+        # sso retorna literalmente o texto "preference_id", e não o ID real da preferência
         return {
-            "id":"preference_id",
+            "id": str(preference_id),
             "link": link_pagamento
-        }
+        },200
 
     except Exception:
         db.session.rollback()
@@ -267,6 +283,74 @@ def webhook_mercadopago():
         payment_id
     )
 
+
+
+    
+    # inicio Valida a assinatura enviada pelo Mercado Pago.
+    segredo = os.getenv("MP_WEBHOOK_SECRET")
+
+    if not segredo:
+        logger.error("Segredo do webhook não configurado.")
+        return jsonify({
+            "erro": "Configuração de segurança indisponível"
+        }), 500
+
+    assinatura = request.headers.get("x-signature", "")
+    request_id = request.headers.get("x-request-id", "")
+
+    partes_assinatura = {}
+
+    for parte in assinatura.split(","):
+        chave_valor = parte.strip().split("=", 1)
+
+        if len(chave_valor) == 2:
+            partes_assinatura[chave_valor[0]] = chave_valor[1]
+
+    timestamp = partes_assinatura.get("ts")
+    assinatura_recebida = partes_assinatura.get("v1")
+
+    # O ID usado na assinatura deve corresponder ao da notificação.
+    data_id = (
+        request.args.get("data.id")
+        or dados.get("data", {}).get("id")
+    )
+
+    if not all([
+        data_id,
+        request_id,
+        timestamp,
+        assinatura_recebida
+    ]):
+        return jsonify({
+            "erro": "Cabeçalhos de assinatura ausentes"
+        }), 401
+
+    # Manifesto usado pelo Mercado Pago para gerar a assinatura.
+    manifesto = (
+        f"id:{str(data_id).lower()};"
+        f"request-id:{request_id};"
+        f"ts:{timestamp};"
+    )
+
+    assinatura_calculada = hmac.new(
+        segredo.encode("utf-8"),
+        manifesto.encode("utf-8"),
+        hashlib.sha256
+    ).hexdigest()
+
+    if not hmac.compare_digest(
+        assinatura_calculada,
+        assinatura_recebida
+    ):
+        logger.warning("Assinatura inválida no webhook.")
+        return jsonify({
+            "erro": "Assinatura inválida"
+        }), 401
+
+    # fim Valida a assinatura enviada pelo Mercado Pago.
+
+
+
     # Ignora notificações que não sejam de pagamento.
     if tipo != "payment":
         return jsonify({
@@ -321,10 +405,9 @@ def webhook_mercadopago():
             "WEBHOOK CONSULTANDO BANCO: %s",
             db.engine.url.database
         )
-
-        compra = Compra.query.filter_by(
-            referencia=referencia
-        ).first()
+            # solicita ao PostgreSQL um bloqueio da linha da compra enquanto a transação estiver aberta.
+            # Isso ajuda a evitar que duas notificações simultâneas alterem a mesma compra ao mesmo tempo.
+        compra =(Compra.query.filter_by(referencia=referencia).with_for_update().first())
 
         # Se não encontrou, encerra o processamento com segurança.
         if compra is None:
