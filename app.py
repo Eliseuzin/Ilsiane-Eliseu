@@ -10,7 +10,7 @@ app = Flask(
 )
 
 # Configuração do banco de dados
-database_url = os.getenv("DATABASE_URLL")
+database_url = os.getenv("DATABASE_URL")
 
 # Compatibilidade com URLs antigas do PostgreSQL
 if database_url and database_url.startswith("postgres://"):
