@@ -7,6 +7,10 @@ import hmac
 import hashlib
 # fim de validaçao da notificaçao do webhook do Mercado Pago
 
+# inicio do teste duplicado do webhook do Mercado Pago para receber notificações de pagamento
+from sqlalchemy.exc import IntegrityError
+
+
 
 routes = Blueprint("routes", __name__)
 
@@ -594,6 +598,49 @@ def webhook_mercadopago():
             "payment_id": str(payment_id)
         }), 200
 
+    # inicio do teste duplicado do webhook do Mercado Pago para receber notificações de pagamento
+
+    # except Exception:
+    #     db.session.rollback()
+
+    #     logger.exception(
+    #         "Erro ao processar webhook do pagamento %s",
+    #         payment_id
+    #     )
+
+    #     return jsonify({
+    #         "erro": "Erro ao processar o pagamento"
+    #     }), 500
+
+
+    except IntegrityError:
+        db.session.rollback()
+
+        pagamento_existente = Compra.query.filter_by(
+            mercado_pago_id=str(payment_id)
+        ).first()
+
+        if pagamento_existente:
+            logger.warning(
+                "Pagamento %s já registrado na compra %s. "
+                "Notificação duplicada ou conflito de associação.",
+                payment_id,
+                pagamento_existente.id
+            )
+
+            return jsonify({
+                "status": "pagamento_ja_registrado"
+            }), 200
+
+        logger.exception(
+            "Erro de integridade ao processar pagamento %s",
+            payment_id
+        )
+
+        return jsonify({
+            "erro": "Erro de integridade no banco"
+        }), 500
+
     except Exception:
         db.session.rollback()
 
@@ -605,5 +652,6 @@ def webhook_mercadopago():
         return jsonify({
             "erro": "Erro ao processar o pagamento"
         }), 500
+    # fim do teste duplicado do webhook do Mercado Pago para receber notificações de pagamento
 
 # fim webhook do Mercado Pago para receber notificações de pagamento
