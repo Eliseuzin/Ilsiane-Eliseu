@@ -292,6 +292,7 @@ def webhook_mercadopago():
     
     # inicio Valida a assinatura enviada pelo Mercado Pago.
     segredo = os.getenv("MP_WEBHOOK_SECRET")
+    segredo= segredo.strip() if segredo else None
 
     if not segredo:
         logger.error("Segredo do webhook não configurado.")

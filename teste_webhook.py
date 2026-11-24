@@ -9,17 +9,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-import os
-import time
-import uuid
-import hmac
-import hashlib
-import requests
-
-from dotenv import load_dotenv
-
-load_dotenv()
-
 segredo = os.getenv("MP_WEBHOOK_SECRET")
 segredo = segredo.strip() if segredo else None
 
