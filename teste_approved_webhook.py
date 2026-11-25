@@ -18,7 +18,8 @@ print("Tamanho do segredo:", len(segredo) if segredo else 0)
 if not segredo:
     raise ValueError("MP_WEBHOOK_SECRET não encontrado no .env")
 
-payment_id = "189592147793"
+payment_id = "191480366032"
+
 
 request_id = str(uuid.uuid4())
 timestamp = str(int(time.time()))

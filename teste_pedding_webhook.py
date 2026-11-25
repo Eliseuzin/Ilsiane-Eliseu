@@ -1,71 +1,40 @@
-import os
-import time
-import uuid
-import hmac
-import hashlib
-import requests
+# # inicio busca de resiltado de pagamentos pendentes
 
-from dotenv import load_dotenv
 
-load_dotenv()
+# import os
+# import requests
+# from dotenv import load_dotenv
 
-segredo = os.getenv("MP_WEBHOOK_SECRET")
-segredo = segredo.strip() if segredo else None
+# load_dotenv()
 
-print("Segredo carregado:", bool(segredo))
-print("Tamanho do segredo:", len(segredo) if segredo else 0)
+# token = os.getenv("MERCADO_PAGO_ACCESS_TOKEN")
+# print("Token carregado:", bool(token))
+# print("Prefixo:", token[:10] if token else "vazio")
 
-if not segredo:
-    raise ValueError("MP_WEBHOOK_SECRET não encontrado no .env")
+# payment_id = "3743185873-e79e16c1-5af9-48e8-8f53-eb589b20a3f3"
 
-payment_id = "189592147793"
+# url = f"https://api.mercadopago.com/checkout/preferences/{preference_id}"
 
-request_id = str(uuid.uuid4())
-timestamp = str(int(time.time()))
+# headers = {
+#     "Authorization": f"Bearer {token}"
+# }
 
-manifesto = (
-    f"id:{payment_id.lower()};"
-    f"request-id:{request_id};"
-    f"ts:{timestamp};"
-)
+# resposta = requests.get(
+#     url,
+#     headers=headers,
+#     timeout=30
+# )
 
-assinatura = hmac.new(
-    segredo.encode("utf-8"),
-    manifesto.encode("utf-8"),
-    hashlib.sha256
-).hexdigest()
+# print("HTTP:", resposta.status_code)
 
-url = (
-    "https://convite-para-nosso-casamento.onrender.com"
-    "/webhook/mercadopago"
-)
+# if resposta.status_code == 200:
+#     dados = resposta.json()
 
-params = {
-    "data.id": payment_id,
-    "type": "payment"
-}
+#     print("Preference ID:", dados.get("id"))
+#     print("Referência:", dados.get("external_reference"))
+#     print("Itens:", dados.get("items"))
+#     print("Payer:", dados.get("payer"))
+# else:
+#     print(resposta.text)
 
-headers = {
-    "x-signature": f"ts={timestamp},v1={assinatura}",
-    "x-request-id": request_id,
-    "Content-Type": "application/json"
-}
-
-payload = {
-    "action": "payment.updated",
-    "type": "payment",
-    "data": {
-        "id": payment_id
-    }
-}
-
-resposta = requests.post(
-    url,
-    params=params,
-    headers=headers,
-    json=payload,
-    timeout=30
-)
-
-print("HTTP:", resposta.status_code)
-print("Resposta:", resposta.text)
+# # fim busca de resiltado de pagamentos pendentes
