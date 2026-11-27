@@ -88,10 +88,14 @@ def criar_pagamento():
     try:
         for item in itens_carrinho:
             id_presente = int(item["id"])
-            quantidade = int(item["quantity"])
+            # impedir valores, como 0, negativo, valores grandes, textos, decimal e boleano
+            if not isinstance(item.get("quantity"), int) or isinstance(item.get("quantity"), bool):
+                return {"erro": "Quantidade inválida."}, 400
 
-            if quantidade <= 0:
-                return {"erro": "A quantidade deve ser maior que zero."}, 400
+            quantidade = item["quantity"]
+
+            if quantidade <= 0 or quantidade > 20:
+                return {"erro": "Quantidade fora do limite permitido."}, 400
 
             # Busca o presente na lista oficial do projeto.
             presente = next(

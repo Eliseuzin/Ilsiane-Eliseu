@@ -7,17 +7,17 @@ API_MERCADO_PAGO_ACCESS_TOKEN=os.getenv("MERCADO_PAGO_ACCESS_TOKEN")
 import os
 from dotenv import load_dotenv
 
-print(
-    "TOKEN EXISTE:",
-    API_MERCADO_PAGO_ACCESS_TOKEN is not None
-)
+# print(
+#     "TOKEN EXISTE:",
+#     API_MERCADO_PAGO_ACCESS_TOKEN is not None
+# )
 
-print(
-    "TOKEN É STRING:",
-    isinstance(API_MERCADO_PAGO_ACCESS_TOKEN, str)
-)
+# print(
+#     "TOKEN É STRING:",
+#     isinstance(API_MERCADO_PAGO_ACCESS_TOKEN, str)
+# )
 
-print(
-    "TOKEN TEM VALOR:",
-    bool(API_MERCADO_PAGO_ACCESS_TOKEN)
-)
+# print(
+#     "TOKEN TEM VALOR:",
+#     bool(API_MERCADO_PAGO_ACCESS_TOKEN)
+# )
